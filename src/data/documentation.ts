@@ -1352,3 +1352,20 @@ export function getNextPrevArticles(slug: string) {
     next: idx >= 0 && idx < flat.length - 1 ? flat[idx + 1] : null,
   };
 }
+
+export interface SearchResult {
+  slug: string;
+  title: string;
+  category: string;
+  excerpt: string;
+}
+
+export function getSearchableContent(): SearchResult[] {
+  return Object.values(articles).map((a) => ({
+    slug: a.slug,
+    title: a.title,
+    category: a.category,
+    excerpt: a.description,
+  }));
+}
+
