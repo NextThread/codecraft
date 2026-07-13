@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Check, Copy } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Prism from 'prismjs';
+import 'prismjs/components/prism-c';
+import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-python';
