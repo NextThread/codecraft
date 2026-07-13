@@ -1,137 +1,124 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* DocFlow Design System - Apple-esque Documentation Theme */
+/* C Handbook — modern, high-contrast reading theme */
 
 @layer base {
   :root {
-    /* Primary Colors */
-    --primary: 217 91% 60%;
+    /* Primary — warm indigo */
+    --primary: 243 75% 59%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary/Accent */
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 215 25% 27%;
+    /* Secondary */
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 10% 20%;
 
-    /* Accent - Purple for code highlights */
-    --accent: 214 31.8182% 91.3725%;
-    --accent-foreground: 215 25% 26.6667%;
+    /* Accent — amber for highlights */
+    --accent: 38 92% 50%;
+    --accent-foreground: 240 10% 10%;
 
     /* Background & Foreground */
-    --background: 0 0% 100%;
-    --foreground: 215 25% 27%;
+    --background: 40 20% 98%;
+    --foreground: 240 10% 15%;
 
     /* Card */
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 27%;
+    --card-foreground: 240 10% 15%;
 
     /* Popover */
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 27%;
+    --popover-foreground: 240 10% 15%;
 
     /* Muted */
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 240 6% 94%;
+    --muted-foreground: 240 5% 42%;
 
     /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     /* Border & Input */
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 217 91% 60%;
+    --border: 240 6% 88%;
+    --input: 240 6% 88%;
+    --ring: 243 75% 59%;
 
-    /* Radius */
-    --radius: 0.5rem;
+    --radius: 0.625rem;
 
     /* Sidebar */
-    --sidebar-background: 210 40% 98%;
-    --sidebar-foreground: 215 25% 27%;
-    --sidebar-primary: 217 91% 60%;
+    --sidebar-background: 40 20% 98%;
+    --sidebar-foreground: 240 10% 15%;
+    --sidebar-primary: 243 75% 59%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 40% 96%;
-    --sidebar-accent-foreground: 215 25% 27%;
-    --sidebar-border: 214 32% 91%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-accent: 240 6% 94%;
+    --sidebar-accent-foreground: 240 10% 15%;
+    --sidebar-border: 240 6% 88%;
+    --sidebar-ring: 243 75% 59%;
 
-    /* Code Block */
-    --code-background: 215 28% 17%;
-    --code-foreground: 214 32% 91%;
+    /* Code */
+    --code: 240 15% 12%;
+    --code-background: 240 15% 12%;
+    --code-foreground: 240 10% 92%;
 
-    /* Semantic Colors */
+    /* Semantic */
     --success: 160 84% 39%;
     --success-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
+    --warning-foreground: 240 10% 10%;
     --info: 217 91% 60%;
     --info-foreground: 0 0% 100%;
   }
 
   .dark {
-    /* Primary Colors */
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 243 85% 72%;
+    --primary-foreground: 240 15% 10%;
 
-    /* Secondary */
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 240 8% 18%;
+    --secondary-foreground: 240 10% 92%;
 
-    /* Accent */
-    --accent: 263 70% 58%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 38 92% 55%;
+    --accent-foreground: 240 15% 10%;
 
-    /* Background & Foreground */
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    --background: 240 15% 8%;
+    --foreground: 240 10% 92%;
 
-    /* Card */
-    --card: 217 33% 17%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 12% 12%;
+    --card-foreground: 240 10% 92%;
 
-    /* Popover */
-    --popover: 217 33% 17%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 12% 12%;
+    --popover-foreground: 240 10% 92%;
 
-    /* Muted */
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 240 8% 16%;
+    --muted-foreground: 240 5% 65%;
 
-    /* Destructive */
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 63% 45%;
+    --destructive-foreground: 0 0% 100%;
 
-    /* Border & Input */
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 217 91% 60%;
+    --border: 240 8% 20%;
+    --input: 240 8% 20%;
+    --ring: 243 85% 72%;
 
-    /* Sidebar */
-    --sidebar-background: 222 47% 11%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 217 33% 17%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 33% 17%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-background: 240 15% 8%;
+    --sidebar-foreground: 240 10% 92%;
+    --sidebar-primary: 243 85% 72%;
+    --sidebar-primary-foreground: 240 15% 10%;
+    --sidebar-accent: 240 8% 16%;
+    --sidebar-accent-foreground: 240 10% 92%;
+    --sidebar-border: 240 8% 20%;
+    --sidebar-ring: 243 85% 72%;
 
-    /* Code Block */
-    --code-background: 222 47% 11%;
-    --code-foreground: 214 32% 91%;
+    --code: 240 20% 6%;
+    --code-background: 240 20% 6%;
+    --code-foreground: 240 10% 92%;
 
-    /* Semantic Colors */
-    --success: 160 84% 39%;
-    --success-foreground: 0 0% 100%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
-    --info: 217 91% 60%;
-    --info-foreground: 0 0% 100%;
+    --success: 160 84% 45%;
+    --success-foreground: 240 15% 10%;
+    --warning: 38 92% 55%;
+    --warning-foreground: 240 15% 10%;
+    --info: 217 91% 70%;
+    --info-foreground: 240 15% 10%;
   }
 }
 
