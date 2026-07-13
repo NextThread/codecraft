@@ -22,1023 +22,1333 @@ export const navigation: DocCategory[] = [
     slug: "getting-started",
     emoji: "🚀",
     articles: [
-      { title: "Introduction", slug: "introduction" },
-      { title: "Installation", slug: "installation" },
-      { title: "Quick Start", slug: "quick-start" },
+      { title: "Introduction to C", slug: "introduction" },
+      { title: "Structure of a C Program", slug: "program-structure" },
+      { title: "Your First Program", slug: "first-program" },
     ],
   },
   {
-    title: "Guides",
-    slug: "guides",
-    emoji: "📖",
+    title: "Basics",
+    slug: "basics",
+    emoji: "🧱",
     articles: [
-      { title: "Authentication", slug: "authentication" },
-      { title: "Error Handling", slug: "error-handling" },
-      { title: "Rate Limiting", slug: "rate-limiting" },
-      { title: "Webhooks", slug: "webhooks" },
-      { title: "Pagination", slug: "pagination" },
+      { title: "Data Types", slug: "data-types" },
+      { title: "Variables", slug: "variables" },
+      { title: "Constants", slug: "constants" },
+      { title: "Operators", slug: "operators" },
+      { title: "Input & Output", slug: "input-output" },
+      { title: "Type Casting", slug: "type-casting" },
     ],
   },
   {
-    title: "API Reference",
-    slug: "api-reference",
-    emoji: "⚡",
+    title: "Control Flow",
+    slug: "control-flow",
+    emoji: "🔀",
     articles: [
-      { title: "Users", slug: "users" },
-      { title: "Products", slug: "products" },
+      { title: "If / Else", slug: "if-else" },
+      { title: "Switch Statement", slug: "switch" },
+      { title: "Loops", slug: "loops" },
+      { title: "Break & Continue", slug: "break-continue" },
     ],
   },
   {
-    title: "Examples",
-    slug: "examples",
-    emoji: "💡",
+    title: "Functions",
+    slug: "functions",
+    emoji: "🧩",
     articles: [
-      { title: "Basic Usage", slug: "basic-usage" },
+      { title: "Functions", slug: "functions" },
+      { title: "Storage Classes", slug: "storage-classes" },
+      { title: "Recursion", slug: "recursion" },
+    ],
+  },
+  {
+    title: "Data Structures",
+    slug: "data-structures",
+    emoji: "📦",
+    articles: [
+      { title: "Arrays", slug: "arrays" },
+      { title: "Strings", slug: "strings" },
+      { title: "Pointers", slug: "pointers" },
+      { title: "Dynamic Memory", slug: "dynamic-memory" },
+      { title: "Structures", slug: "structures" },
+      { title: "Unions", slug: "unions" },
     ],
   },
 ];
 
+const A = (
+  slug: string,
+  title: string,
+  category: string,
+  categorySlug: string,
+  description: string,
+  readingTime: number,
+  content: string,
+): DocArticle => ({
+  slug,
+  title,
+  category,
+  categorySlug,
+  description,
+  readingTime,
+  lastUpdated: "2026-07-13",
+  content,
+});
+
 export const articles: Record<string, DocArticle> = {
-  "introduction": {
-    slug: "introduction",
-    title: "Introduction",
-    description: "Learn what Acme API is and how it can help you build amazing products.",
-    category: "Getting Started",
-    categorySlug: "getting-started",
-    lastUpdated: "2026-01-06",
-    readingTime: 3,
-    content: `
-# Introduction
+  introduction: A(
+    "introduction",
+    "Introduction to C",
+    "Getting Started",
+    "getting-started",
+    "What C is, why it matters, and where it's used today.",
+    3,
+    `
+# Introduction to C
 
-Welcome to the Acme API documentation! Acme API is a powerful, developer-friendly platform that helps you build amazing products faster.
+C is a general-purpose, procedural programming language developed by **Dennis Ritchie** at Bell Labs in 1972. It is often called the *mother of all modern languages* because languages like C++, Java, Python and Go borrow heavily from its syntax and ideas.
 
-## What is Acme API?
+## Why learn C?
 
-Acme API provides a comprehensive set of tools and endpoints that enable you to:
+- **Close to the hardware** — you control memory directly through pointers.
+- **Fast and efficient** — minimal runtime, compiles to native machine code.
+- **Portable** — the same C code runs on almost every platform.
+- **Foundation for systems programming** — operating systems, embedded devices, compilers and databases are written in C.
 
-- **Manage Users**: Create, update, and authenticate users with ease
-- **Handle Products**: Full CRUD operations for your product catalog
-- **Process Payments**: Secure payment processing with multiple providers
-- **Send Notifications**: Email, SMS, and push notifications
+## Where C is used
 
-## Why Choose Acme API?
+- Operating systems (Linux, Windows kernel modules, macOS internals)
+- Embedded systems and microcontrollers
+- Game engines and graphics libraries
+- Databases (MySQL, PostgreSQL, SQLite)
+- Compilers and interpreters (including Python's CPython)
 
-### Developer Experience
-We've built Acme API with developers in mind. Our SDKs are available in multiple languages, and our documentation includes real-world examples for every endpoint.
+## Key features
 
-### Scalability
-Whether you're a startup or an enterprise, Acme API scales with your needs. Our infrastructure handles millions of requests per day.
+1. Simple and small core language
+2. Rich set of built-in operators
+3. Structured programming via functions
+4. Direct memory access using pointers
+5. Extensible through libraries
 
-### Security
-Security is our top priority. All API communications are encrypted, and we offer multiple authentication methods including OAuth 2.0 and API keys.
+:::info
+C is a compiled language: you write source code (\`.c\` file), a compiler like **gcc** or **clang** turns it into an executable, and then you run it.
+:::
 
-## Getting Help
+Continue to [Structure of a C Program](/docs/program-structure).
+`,
+  ),
 
-If you need help, you have several options:
+  "program-structure": A(
+    "program-structure",
+    "Structure of a C Program",
+    "Getting Started",
+    "getting-started",
+    "The anatomy of every C program: preprocessor, main, statements.",
+    3,
+    `
+# Structure of a C Program
 
-1. **Documentation**: You're already here! Browse through our comprehensive guides and API reference.
-2. **Community**: Join our [Discord community](https://discord.gg/acme) to connect with other developers.
-3. **Support**: For enterprise customers, reach out to our dedicated support team.
+Every C program follows the same basic skeleton.
 
-Ready to get started? Head over to the [Installation](/docs/installation) guide.
-    `,
-  },
-  "installation": {
-    slug: "installation",
-    title: "Installation",
-    description: "Step-by-step guide to installing the Acme API SDK in your project.",
-    category: "Getting Started",
-    categorySlug: "getting-started",
-    lastUpdated: "2026-01-05",
-    readingTime: 5,
-    content: `
-# Installation
+## The skeleton
 
-Get the Acme API SDK installed in your project in just a few minutes.
+\`\`\`c
+#include <stdio.h>          // 1. Preprocessor directive
 
-## Prerequisites
-
-Before you begin, make sure you have:
-
-- Node.js 18.x or higher
-- npm, yarn, or pnpm
-- An Acme API account ([sign up here](https://acme.dev/signup))
-
-## Install the SDK
-
-Choose your preferred package manager:
-
-\`\`\`bash
-# Using npm
-npm install @acme/api-sdk
-
-# Using yarn
-yarn add @acme/api-sdk
-
-# Using pnpm
-pnpm add @acme/api-sdk
+int main(void) {            // 2. main() — entry point
+    printf("Hello!\\n");    // 3. Statement
+    return 0;               // 4. Return value to OS
+}
 \`\`\`
 
-## Configuration
+## The four pieces
 
-After installation, you'll need to configure the SDK with your API key:
+1. **Preprocessor directives** — lines starting with \`#\`. They run *before* compilation. \`#include\` pulls in header files that declare functions like \`printf\`.
+2. **The \`main\` function** — execution starts here. Every C program must have exactly one \`main\`.
+3. **Statements** — instructions ending with a semicolon.
+4. **Return value** — \`0\` tells the OS the program ran successfully.
 
-\`\`\`javascript
-import { AcmeClient } from '@acme/api-sdk';
+## Example: a slightly bigger program
 
-const client = new AcmeClient({
-  apiKey: process.env.ACME_API_KEY,
-  environment: 'production', // or 'sandbox' for testing
-});
+\`\`\`c
+#include <stdio.h>
+
+// Function declaration
+int square(int n);
+
+int main(void) {
+    int number = 5;
+    int result = square(number);
+    printf("Square of %d is %d\\n", number, result);
+    return 0;
+}
+
+// Function definition
+int square(int n) {
+    return n * n;
+}
+\`\`\`
+
+**Output**
+\`\`\`text
+Square of 5 is 25
+\`\`\`
+`,
+  ),
+
+  "first-program": A(
+    "first-program",
+    "Your First Program",
+    "Getting Started",
+    "getting-started",
+    "Write, compile and run Hello, World in C.",
+    2,
+    `
+# Your First Program
+
+## Hello, World
+
+\`\`\`c
+#include <stdio.h>
+
+int main(void) {
+    printf("Hello, World!\\n");
+    return 0;
+}
+\`\`\`
+
+## Compile and run
+
+On Linux/macOS with gcc:
+
+\`\`\`bash
+gcc hello.c -o hello
+./hello
+\`\`\`
+
+**Output**
+\`\`\`text
+Hello, World!
 \`\`\`
 
 :::info
-Never commit your API key to version control. Use environment variables instead.
+\`\\n\` is the *newline* escape sequence — it moves the cursor to the next line.
 :::
+`,
+  ),
 
-## Verify Installation
+  "data-types": A(
+    "data-types",
+    "Data Types",
+    "Basics",
+    "basics",
+    "Primary, derived and user-defined data types in C.",
+    5,
+    `
+# Data Types
 
-Test your installation by making a simple API call:
+A **data type** tells the compiler what kind of value a variable holds and how much memory it needs.
 
-\`\`\`javascript
-async function testConnection() {
-  try {
-    const status = await client.health.check();
-    console.log('API Status:', status);
-  } catch (error) {
-    console.error('Connection failed:', error.message);
-  }
-}
+## Categories
 
-testConnection();
-\`\`\`
+- **Primary (built-in):** \`int\`, \`char\`, \`float\`, \`double\`, \`void\`
+- **Derived:** arrays, pointers, functions
+- **User-defined:** \`struct\`, \`union\`, \`enum\`, \`typedef\`
 
-You should see a response like:
+## Primary types (typical sizes)
 
-\`\`\`json
-{
-  "status": "healthy",
-  "version": "3.0.0",
-  "timestamp": "2026-01-06T10:30:00Z"
-}
-\`\`\`
+| Type | Size | Range |
+|------|------|-------|
+| \`char\` | 1 byte | -128 to 127 |
+| \`int\` | 4 bytes | -2,147,483,648 to 2,147,483,647 |
+| \`float\` | 4 bytes | ~6 decimal digits |
+| \`double\` | 8 bytes | ~15 decimal digits |
+| \`void\` | — | represents "no value" |
 
-## Next Steps
+## Modifiers
 
-Now that you've installed the SDK, proceed to the [Quick Start](/docs/quick-start) guide to make your first API call.
-    `,
-  },
-  "quick-start": {
-    slug: "quick-start",
-    title: "Quick Start",
-    description: "Get up and running with Acme API in under 5 minutes.",
-    category: "Getting Started",
-    categorySlug: "getting-started",
-    lastUpdated: "2026-01-06",
-    readingTime: 4,
-    content: `
-# Quick Start
+Types can be modified with \`short\`, \`long\`, \`signed\`, \`unsigned\`:
 
-This guide will have you making API calls in under 5 minutes.
+- \`unsigned int\` — 0 to 4,294,967,295
+- \`long long\` — at least 8 bytes
+- \`short\` — at least 2 bytes
 
-## Step 1: Get Your API Key
+## Program: sizes of data types
 
-1. Log in to your [Acme Dashboard](https://dashboard.acme.dev)
-2. Navigate to **Settings** → **API Keys**
-3. Click **Create New Key**
-4. Copy your key and store it securely
+\`\`\`c
+#include <stdio.h>
 
-## Step 2: Initialize the Client
-
-\`\`\`javascript
-import { AcmeClient } from '@acme/api-sdk';
-
-const client = new AcmeClient({
-  apiKey: 'your-api-key-here',
-});
-\`\`\`
-
-## Step 3: Make Your First Request
-
-Let's create a user:
-
-\`\`\`javascript
-async function createUser() {
-  const user = await client.users.create({
-    email: 'john@example.com',
-    name: 'John Doe',
-    role: 'user',
-  });
-  
-  console.log('Created user:', user);
-  return user;
+int main(void) {
+    printf("char:        %zu bytes\\n", sizeof(char));
+    printf("int:         %zu bytes\\n", sizeof(int));
+    printf("float:       %zu bytes\\n", sizeof(float));
+    printf("double:      %zu bytes\\n", sizeof(double));
+    printf("long long:   %zu bytes\\n", sizeof(long long));
+    return 0;
 }
 \`\`\`
 
-## Step 4: List All Users
+**Sample output**
+\`\`\`text
+char:        1 bytes
+int:         4 bytes
+float:       4 bytes
+double:      8 bytes
+long long:   8 bytes
+\`\`\`
 
-\`\`\`javascript
-async function listUsers() {
-  const users = await client.users.list({
-    limit: 10,
-    offset: 0,
-  });
-  
-  console.log('Users:', users.data);
-  console.log('Total:', users.total);
+:::info
+\`sizeof\` is an operator (not a function) that returns the size in bytes of any type or variable.
+:::
+`,
+  ),
+
+  variables: A(
+    "variables",
+    "Variables",
+    "Basics",
+    "basics",
+    "Declaring, initializing and using variables.",
+    4,
+    `
+# Variables
+
+A **variable** is a named location in memory that stores a value which can change.
+
+## Declaration and initialization
+
+\`\`\`c
+int age;           // declaration
+age = 21;          // assignment
+
+int marks = 95;    // declaration + initialization
+float pi = 3.14f;
+char grade = 'A';
+\`\`\`
+
+## Rules for names
+
+- Start with a letter or underscore (\`_\`), never a digit.
+- May contain letters, digits, underscores.
+- Case-sensitive — \`Score\` and \`score\` are different.
+- Cannot be a C keyword (\`int\`, \`return\`, \`while\`, ...).
+
+## Program: using variables
+
+\`\`\`c
+#include <stdio.h>
+
+int main(void) {
+    char name[20] = "Aarav";
+    int age = 20;
+    float height = 5.9f;
+
+    printf("Name:   %s\\n", name);
+    printf("Age:    %d\\n", age);
+    printf("Height: %.1f ft\\n", height);
+    return 0;
 }
 \`\`\`
 
-## Complete Example
+**Output**
+\`\`\`text
+Name:   Aarav
+Age:    20
+Height: 5.9 ft
+\`\`\`
+`,
+  ),
 
-Here's a complete example putting it all together:
+  constants: A(
+    "constants",
+    "Constants",
+    "Basics",
+    "basics",
+    "Values that never change: literals, #define and const.",
+    3,
+    `
+# Constants
 
-\`\`\`javascript
-import { AcmeClient } from '@acme/api-sdk';
+A **constant** is a fixed value that cannot be modified once defined.
 
-const client = new AcmeClient({
-  apiKey: process.env.ACME_API_KEY,
-});
+## Two ways to define constants
 
-async function main() {
-  // Create a new user
-  const newUser = await client.users.create({
-    email: 'jane@example.com',
-    name: 'Jane Smith',
-    role: 'admin',
-  });
-  
-  console.log('Created:', newUser);
-  
-  // Fetch the user by ID
-  const user = await client.users.get(newUser.id);
-  console.log('Fetched:', user);
-  
-  // Update the user
-  const updated = await client.users.update(newUser.id, {
-    name: 'Jane Doe',
-  });
-  console.log('Updated:', updated);
-  
-  // List all users
-  const allUsers = await client.users.list();
-  console.log('All users:', allUsers.data.length);
+**Using \`#define\` (preprocessor macro):**
+\`\`\`c
+#define PI 3.14159
+#define MAX 100
+\`\`\`
+
+**Using the \`const\` keyword:**
+\`\`\`c
+const float pi = 3.14159f;
+const int max = 100;
+\`\`\`
+
+\`const\` is type-safe; \`#define\` is a raw text replacement.
+
+## Program: area of a circle
+
+\`\`\`c
+#include <stdio.h>
+#define PI 3.14159
+
+int main(void) {
+    const float radius = 5.0f;
+    float area = PI * radius * radius;
+    printf("Area = %.2f\\n", area);
+    return 0;
 }
-
-main().catch(console.error);
 \`\`\`
 
-## What's Next?
+**Output**
+\`\`\`text
+Area = 78.54
+\`\`\`
+`,
+  ),
 
-- Learn about [Authentication](/docs/authentication) to secure your API calls
-- Explore the [API Reference](/docs/api-reference/users) for all available endpoints
-- Check out [Examples](/docs/examples/basic-usage) for more use cases
-    `,
-  },
-  "authentication": {
-    slug: "authentication",
-    title: "Authentication",
-    description: "Learn how to authenticate your API requests securely.",
-    category: "Guides",
-    categorySlug: "guides",
-    lastUpdated: "2026-01-04",
-    readingTime: 6,
-    content: `
-# Authentication
+  operators: A(
+    "operators",
+    "Operators",
+    "Basics",
+    "basics",
+    "Arithmetic, relational, logical, bitwise and assignment operators.",
+    5,
+    `
+# Operators
 
-Acme API supports multiple authentication methods to fit your use case.
+Operators tell the compiler to perform an operation on operands.
 
-## API Key Authentication
+## Categories
 
-The simplest way to authenticate is with an API key:
+| Category | Examples |
+|----------|----------|
+| Arithmetic | \`+ - * / %\` |
+| Relational | \`== != > < >= <=\` |
+| Logical | \`&& || !\` |
+| Bitwise | \`& | ^ ~ << >>\` |
+| Assignment | \`= += -= *= /=\` |
+| Increment/Decrement | \`++ --\` |
+| Conditional (ternary) | \`? :\` |
 
-\`\`\`javascript
-const client = new AcmeClient({
-  apiKey: 'your-api-key',
-});
+## Program: operators in action
+
+\`\`\`c
+#include <stdio.h>
+
+int main(void) {
+    int a = 10, b = 3;
+
+    printf("a + b  = %d\\n", a + b);
+    printf("a - b  = %d\\n", a - b);
+    printf("a * b  = %d\\n", a * b);
+    printf("a / b  = %d\\n", a / b);   // integer division
+    printf("a %% b  = %d\\n", a % b);
+
+    printf("a > b  = %d\\n", a > b);   // 1 = true
+    printf("a && b = %d\\n", a && b);
+    printf("a & b  = %d\\n", a & b);   // bitwise AND
+
+    int max = (a > b) ? a : b;
+    printf("max    = %d\\n", max);
+    return 0;
+}
 \`\`\`
 
-Include the API key in the \`Authorization\` header:
+**Output**
+\`\`\`text
+a + b  = 13
+a - b  = 7
+a * b  = 30
+a / b  = 3
+a % b  = 1
+a > b  = 1
+a && b = 1
+a & b  = 2
+max    = 10
+\`\`\`
+`,
+  ),
 
-\`\`\`bash
-curl https://api.acme.dev/v1/users \\
-  -H "Authorization: Bearer your-api-key"
+  "input-output": A(
+    "input-output",
+    "Input & Output",
+    "Basics",
+    "basics",
+    "printf, scanf and formatted I/O.",
+    4,
+    `
+# Input & Output
+
+C uses **\`printf\`** to print and **\`scanf\`** to read input. Both live in \`<stdio.h>\`.
+
+## Format specifiers
+
+| Specifier | Type |
+|-----------|------|
+| \`%d\` | int |
+| \`%f\` | float |
+| \`%lf\` | double |
+| \`%c\` | char |
+| \`%s\` | string |
+| \`%x\` | hexadecimal |
+
+## Program: read and print
+
+\`\`\`c
+#include <stdio.h>
+
+int main(void) {
+    int age;
+    float weight;
+    char initial;
+
+    printf("Enter your initial: ");
+    scanf(" %c", &initial);
+
+    printf("Enter your age: ");
+    scanf("%d", &age);
+
+    printf("Enter your weight (kg): ");
+    scanf("%f", &weight);
+
+    printf("\\nHello %c! You are %d years old and weigh %.2f kg.\\n",
+           initial, age, weight);
+    return 0;
+}
+\`\`\`
+
+**Sample run**
+\`\`\`text
+Enter your initial: A
+Enter your age: 22
+Enter your weight (kg): 68.5
+
+Hello A! You are 22 years old and weigh 68.50 kg.
 \`\`\`
 
 :::warning
-API keys provide full access to your account. Keep them secret and never expose them in client-side code.
+\`scanf\` needs the **address** of the variable, so remember the \`&\` — except for strings (arrays), where the name is already an address.
 :::
+`,
+  ),
 
-## OAuth 2.0
+  "type-casting": A(
+    "type-casting",
+    "Type Casting",
+    "Basics",
+    "basics",
+    "Converting a value from one type to another.",
+    3,
+    `
+# Type Casting
 
-For user-facing applications, we recommend OAuth 2.0:
+Type casting converts a value from one data type to another.
 
-### Step 1: Redirect to Authorization
+## Two kinds
 
-\`\`\`javascript
-const authUrl = client.oauth.getAuthorizationUrl({
-  clientId: 'your-client-id',
-  redirectUri: 'https://yourapp.com/callback',
-  scope: ['users:read', 'users:write'],
-});
+- **Implicit** — done automatically by the compiler.
+- **Explicit** — you write \`(type) value\`.
 
-// Redirect the user to authUrl
-\`\`\`
+## Program: implicit vs explicit
 
-### Step 2: Exchange Code for Token
+\`\`\`c
+#include <stdio.h>
 
-\`\`\`javascript
-const { accessToken, refreshToken } = await client.oauth.exchangeCode({
-  code: 'authorization-code-from-callback',
-  clientId: 'your-client-id',
-  clientSecret: 'your-client-secret',
-  redirectUri: 'https://yourapp.com/callback',
-});
-\`\`\`
+int main(void) {
+    int a = 7, b = 2;
 
-### Step 3: Use the Access Token
+    float implicit = a / b;             // both ints -> integer division
+    float explicit = (float)a / b;      // one cast -> real division
 
-\`\`\`javascript
-const client = new AcmeClient({
-  accessToken: accessToken,
-});
-
-// Make authenticated requests
-const user = await client.users.me();
-\`\`\`
-
-## Refresh Tokens
-
-Access tokens expire after 1 hour. Use refresh tokens to get new access tokens:
-
-\`\`\`javascript
-const { accessToken: newToken } = await client.oauth.refreshToken({
-  refreshToken: 'your-refresh-token',
-  clientId: 'your-client-id',
-  clientSecret: 'your-client-secret',
-});
-\`\`\`
-
-## Scopes
-
-| Scope | Description |
-|-------|-------------|
-| \`users:read\` | Read user information |
-| \`users:write\` | Create and update users |
-| \`products:read\` | Read product catalog |
-| \`products:write\` | Manage products |
-| \`orders:read\` | View orders |
-| \`orders:write\` | Create and manage orders |
-
-## Best Practices
-
-1. **Rotate keys regularly**: Generate new API keys every 90 days
-2. **Use environment variables**: Never hardcode secrets
-3. **Limit scopes**: Request only the permissions you need
-4. **Monitor usage**: Check your dashboard for unusual activity
-    `,
-  },
-  "error-handling": {
-    slug: "error-handling",
-    title: "Error Handling",
-    description: "Learn how to handle API errors gracefully in your application.",
-    category: "Guides",
-    categorySlug: "guides",
-    lastUpdated: "2026-01-03",
-    readingTime: 5,
-    content: `
-# Error Handling
-
-The Acme API uses standard HTTP status codes and returns detailed error messages.
-
-## Error Response Format
-
-All errors follow this structure:
-
-\`\`\`json
-{
-  "error": {
-    "code": "validation_error",
-    "message": "The request body is invalid",
-    "details": [
-      {
-        "field": "email",
-        "message": "Invalid email format"
-      }
-    ]
-  }
+    printf("implicit = %.2f\\n", implicit);
+    printf("explicit = %.2f\\n", explicit);
+    return 0;
 }
 \`\`\`
 
-## HTTP Status Codes
+**Output**
+\`\`\`text
+implicit = 3.00
+explicit = 3.50
+\`\`\`
+`,
+  ),
 
-| Code | Description |
-|------|-------------|
-| \`400\` | Bad Request - Invalid parameters |
-| \`401\` | Unauthorized - Invalid or missing API key |
-| \`403\` | Forbidden - Insufficient permissions |
-| \`404\` | Not Found - Resource doesn't exist |
-| \`409\` | Conflict - Resource already exists |
-| \`422\` | Unprocessable Entity - Validation failed |
-| \`429\` | Too Many Requests - Rate limit exceeded |
-| \`500\` | Internal Server Error - Something went wrong |
+  "if-else": A(
+    "if-else",
+    "If / Else",
+    "Control Flow",
+    "control-flow",
+    "Branching your program with if, else if and else.",
+    4,
+    `
+# If / Else
 
-## Error Codes
+The \`if\` statement lets your program make decisions.
 
-Common error codes you'll encounter:
+## Syntax
 
-- \`invalid_api_key\` - The API key is invalid or expired
-- \`validation_error\` - Request validation failed
-- \`resource_not_found\` - The requested resource doesn't exist
-- \`rate_limit_exceeded\` - Too many requests
-- \`insufficient_permissions\` - Missing required scope
+\`\`\`c
+if (condition) {
+    // runs when condition is true
+} else if (other_condition) {
+    // runs when other_condition is true
+} else {
+    // runs when nothing above matched
+}
+\`\`\`
 
-## Handling Errors in JavaScript
+## Program: grading system
 
-\`\`\`javascript
-import { AcmeClient, AcmeError } from '@acme/api-sdk';
+\`\`\`c
+#include <stdio.h>
 
-const client = new AcmeClient({ apiKey: 'your-key' });
+int main(void) {
+    int marks;
+    printf("Enter marks (0-100): ");
+    scanf("%d", &marks);
 
-async function createUser(data) {
-  try {
-    const user = await client.users.create(data);
-    return user;
-  } catch (error) {
-    if (error instanceof AcmeError) {
-      switch (error.code) {
-        case 'validation_error':
-          console.error('Validation failed:', error.details);
-          break;
-        case 'rate_limit_exceeded':
-          console.error('Rate limited. Retry after:', error.retryAfter);
-          break;
-        default:
-          console.error('API error:', error.message);
-      }
+    if (marks >= 90) {
+        printf("Grade: A\\n");
+    } else if (marks >= 75) {
+        printf("Grade: B\\n");
+    } else if (marks >= 50) {
+        printf("Grade: C\\n");
     } else {
-      console.error('Network error:', error.message);
+        printf("Grade: F\\n");
     }
-    throw error;
-  }
+    return 0;
 }
 \`\`\`
 
-## Retry Logic
+**Sample run**
+\`\`\`text
+Enter marks (0-100): 82
+Grade: B
+\`\`\`
+`,
+  ),
 
-For transient errors, implement exponential backoff:
+  switch: A(
+    "switch",
+    "Switch Statement",
+    "Control Flow",
+    "control-flow",
+    "A clean multi-way branch based on a single value.",
+    3,
+    `
+# Switch Statement
 
-\`\`\`javascript
-async function withRetry(fn, maxRetries = 3) {
-  for (let attempt = 1; attempt <= maxRetries; attempt++) {
-    try {
-      return await fn();
-    } catch (error) {
-      if (error.code === 'rate_limit_exceeded' && attempt < maxRetries) {
-        const delay = Math.pow(2, attempt) * 1000;
-        await new Promise(resolve => setTimeout(resolve, delay));
-        continue;
-      }
-      throw error;
+Use \`switch\` when you want to compare one variable against many constant values.
+
+## Syntax
+
+\`\`\`c
+switch (expression) {
+    case value1:
+        // ...
+        break;
+    case value2:
+        // ...
+        break;
+    default:
+        // runs if no case matches
+}
+\`\`\`
+
+\`break\` prevents *fall-through* into the next case.
+
+## Program: simple calculator
+
+\`\`\`c
+#include <stdio.h>
+
+int main(void) {
+    char op;
+    double x, y;
+
+    printf("Enter operator (+, -, *, /): ");
+    scanf(" %c", &op);
+    printf("Enter two numbers: ");
+    scanf("%lf %lf", &x, &y);
+
+    switch (op) {
+        case '+': printf("= %.2f\\n", x + y); break;
+        case '-': printf("= %.2f\\n", x - y); break;
+        case '*': printf("= %.2f\\n", x * y); break;
+        case '/':
+            if (y != 0) printf("= %.2f\\n", x / y);
+            else        printf("Cannot divide by zero.\\n");
+            break;
+        default:  printf("Unknown operator.\\n");
     }
-  }
+    return 0;
+}
+\`\`\`
+`,
+  ),
+
+  loops: A(
+    "loops",
+    "Loops",
+    "Control Flow",
+    "control-flow",
+    "for, while and do-while loops.",
+    5,
+    `
+# Loops
+
+Loops repeat a block of code while a condition is true.
+
+## The three loops
+
+**\`for\` — when you know how many times:**
+\`\`\`c
+for (int i = 0; i < 5; i++) {
+    printf("%d ", i);
+}
+\`\`\`
+
+**\`while\` — check condition first:**
+\`\`\`c
+int i = 0;
+while (i < 5) {
+    printf("%d ", i);
+    i++;
+}
+\`\`\`
+
+**\`do-while\` — run at least once:**
+\`\`\`c
+int i = 0;
+do {
+    printf("%d ", i);
+    i++;
+} while (i < 5);
+\`\`\`
+
+## Program: multiplication table
+
+\`\`\`c
+#include <stdio.h>
+
+int main(void) {
+    int n;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+
+    for (int i = 1; i <= 10; i++) {
+        printf("%d x %d = %d\\n", n, i, n * i);
+    }
+    return 0;
+}
+\`\`\`
+
+**Sample run (n = 3)**
+\`\`\`text
+3 x 1 = 3
+3 x 2 = 6
+...
+3 x 10 = 30
+\`\`\`
+`,
+  ),
+
+  "break-continue": A(
+    "break-continue",
+    "Break & Continue",
+    "Control Flow",
+    "control-flow",
+    "Exit loops early or skip an iteration.",
+    3,
+    `
+# Break & Continue
+
+- **\`break\`** exits the loop immediately.
+- **\`continue\`** skips the rest of the current iteration and jumps to the next one.
+
+## Program: primes below 20
+
+\`\`\`c
+#include <stdio.h>
+
+int main(void) {
+    for (int n = 2; n < 20; n++) {
+        int is_prime = 1;
+        for (int d = 2; d * d <= n; d++) {
+            if (n % d == 0) { is_prime = 0; break; }
+        }
+        if (!is_prime) continue;   // skip non-primes
+        printf("%d ", n);
+    }
+    printf("\\n");
+    return 0;
+}
+\`\`\`
+
+**Output**
+\`\`\`text
+2 3 5 7 11 13 17 19
+\`\`\`
+`,
+  ),
+
+  functions: A(
+    "functions",
+    "Functions",
+    "Functions",
+    "functions",
+    "Group reusable code into named blocks.",
+    5,
+    `
+# Functions
+
+A **function** is a named, reusable block of code. Functions break large problems into smaller pieces.
+
+## Three parts
+
+1. **Declaration (prototype)** — tells the compiler the function exists.
+2. **Definition** — the actual body.
+3. **Call** — invoke the function by name.
+
+\`\`\`c
+return_type name(parameter_list);   // declaration
+
+return_type name(parameter_list) {  // definition
+    // body
+    return value;
+}
+\`\`\`
+
+## Pass by value
+
+C passes arguments **by value** — the function gets a copy.
+
+## Program: add two numbers
+
+\`\`\`c
+#include <stdio.h>
+
+int add(int a, int b);       // prototype
+
+int main(void) {
+    int result = add(4, 7);
+    printf("Sum = %d\\n", result);
+    return 0;
 }
 
-// Usage
-const user = await withRetry(() => client.users.get(userId));
+int add(int a, int b) {      // definition
+    return a + b;
+}
+\`\`\`
+
+**Output**
+\`\`\`text
+Sum = 11
+\`\`\`
+`,
+  ),
+
+  "storage-classes": A(
+    "storage-classes",
+    "Storage Classes",
+    "Functions",
+    "functions",
+    "auto, register, static and extern.",
+    3,
+    `
+# Storage Classes
+
+A storage class defines the **scope**, **lifetime** and **linkage** of a variable.
+
+| Class | Scope | Lifetime |
+|-------|-------|----------|
+| \`auto\` | Block | Block |
+| \`register\` | Block | Block (hint: keep in CPU register) |
+| \`static\` | Block/File | Whole program |
+| \`extern\` | Global | Whole program (defined elsewhere) |
+
+## Program: static counter
+
+\`\`\`c
+#include <stdio.h>
+
+void counter(void) {
+    static int count = 0;   // keeps its value between calls
+    count++;
+    printf("Called %d time(s)\\n", count);
+}
+
+int main(void) {
+    counter();
+    counter();
+    counter();
+    return 0;
+}
+\`\`\`
+
+**Output**
+\`\`\`text
+Called 1 time(s)
+Called 2 time(s)
+Called 3 time(s)
+\`\`\`
+`,
+  ),
+
+  recursion: A(
+    "recursion",
+    "Recursion",
+    "Functions",
+    "functions",
+    "A function that calls itself.",
+    3,
+    `
+# Recursion
+
+**Recursion** is when a function calls itself to solve a smaller version of the same problem. Every recursion needs:
+
+1. A **base case** — when to stop.
+2. A **recursive case** — the call to itself.
+
+## Program: factorial
+
+\`\`\`c
+#include <stdio.h>
+
+long long factorial(int n) {
+    if (n <= 1) return 1;              // base case
+    return n * factorial(n - 1);       // recursive case
+}
+
+int main(void) {
+    int n;
+    printf("Enter n: ");
+    scanf("%d", &n);
+    printf("%d! = %lld\\n", n, factorial(n));
+    return 0;
+}
+\`\`\`
+
+**Sample run (n = 5)**
+\`\`\`text
+5! = 120
+\`\`\`
+`,
+  ),
+
+  arrays: A(
+    "arrays",
+    "Arrays",
+    "Data Structures",
+    "data-structures",
+    "Collections of same-type elements stored contiguously.",
+    5,
+    `
+# Arrays
+
+An **array** stores a fixed-size sequence of elements of the same type in contiguous memory.
+
+## Declaration and access
+
+\`\`\`c
+int marks[5] = {90, 85, 78, 92, 88};
+printf("%d\\n", marks[0]);   // first element
+printf("%d\\n", marks[4]);   // last element
+\`\`\`
+
+Indexes start at **0** and go up to \`size - 1\`.
+
+## Two-dimensional arrays
+
+\`\`\`c
+int matrix[2][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+\`\`\`
+
+## Program: sum and average
+
+\`\`\`c
+#include <stdio.h>
+
+int main(void) {
+    int n;
+    printf("How many numbers? ");
+    scanf("%d", &n);
+
+    int arr[100];
+    int sum = 0;
+
+    for (int i = 0; i < n; i++) {
+        printf("arr[%d] = ", i);
+        scanf("%d", &arr[i]);
+        sum += arr[i];
+    }
+
+    printf("Sum     = %d\\n", sum);
+    printf("Average = %.2f\\n", (float)sum / n);
+    return 0;
+}
+\`\`\`
+`,
+  ),
+
+  strings: A(
+    "strings",
+    "Strings",
+    "Data Structures",
+    "data-structures",
+    "Character arrays terminated by a null character.",
+    4,
+    `
+# Strings
+
+In C, a **string** is a \`char\` array ending with the null character \`'\\0'\`.
+
+\`\`\`c
+char name[6] = {'H','e','l','l','o','\\0'};
+char name2[] = "Hello";   // shorthand, \\0 added automatically
+\`\`\`
+
+## Common functions (\`<string.h>\`)
+
+| Function | Purpose |
+|----------|---------|
+| \`strlen(s)\` | length |
+| \`strcpy(a, b)\` | copy b into a |
+| \`strcat(a, b)\` | append b to a |
+| \`strcmp(a, b)\` | compare (0 = equal) |
+
+## Program: string operations
+
+\`\`\`c
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char first[50] = "Hello";
+    char last[]    = "World";
+
+    printf("Length of first: %zu\\n", strlen(first));
+
+    strcat(first, ", ");
+    strcat(first, last);
+    strcat(first, "!");
+
+    printf("Result: %s\\n", first);
+
+    if (strcmp("abc", "abc") == 0) {
+        printf("Strings are equal\\n");
+    }
+    return 0;
+}
+\`\`\`
+
+**Output**
+\`\`\`text
+Length of first: 5
+Result: Hello, World!
+Strings are equal
+\`\`\`
+`,
+  ),
+
+  pointers: A(
+    "pointers",
+    "Pointers",
+    "Data Structures",
+    "data-structures",
+    "Variables that store memory addresses.",
+    6,
+    `
+# Pointers
+
+A **pointer** is a variable that stores the *address* of another variable. Pointers are what make C powerful (and famous for being tricky).
+
+## Declaration and use
+
+\`\`\`c
+int x = 10;
+int *p = &x;    // p holds address of x
+
+printf("%d\\n", x);    // 10
+printf("%p\\n", p);    // address of x
+printf("%d\\n", *p);   // 10  (dereference)
+*p = 20;              // change x through p
+printf("%d\\n", x);    // 20
+\`\`\`
+
+- \`&x\` — "address of x"
+- \`*p\` — "value at address p" (dereference)
+
+## Pointers and arrays
+
+The array name is itself a pointer to its first element:
+
+\`\`\`c
+int arr[3] = {10, 20, 30};
+int *p = arr;
+printf("%d\\n", *(p + 1));   // 20
+\`\`\`
+
+## Program: swap two numbers
+
+\`\`\`c
+#include <stdio.h>
+
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main(void) {
+    int x = 5, y = 9;
+    printf("Before: x = %d, y = %d\\n", x, y);
+    swap(&x, &y);
+    printf("After : x = %d, y = %d\\n", x, y);
+    return 0;
+}
+\`\`\`
+
+**Output**
+\`\`\`text
+Before: x = 5, y = 9
+After : x = 9, y = 5
+\`\`\`
+
+:::warning
+Never dereference an uninitialized or freed pointer — that's undefined behavior.
+:::
+`,
+  ),
+
+  "dynamic-memory": A(
+    "dynamic-memory",
+    "Dynamic Memory",
+    "Data Structures",
+    "data-structures",
+    "Allocate and free memory at runtime.",
+    5,
+    `
+# Dynamic Memory Allocation
+
+Static arrays have a fixed size. For memory whose size you decide at runtime, use functions from \`<stdlib.h>\`.
+
+| Function | Purpose |
+|----------|---------|
+| \`malloc(size)\` | allocate uninitialized bytes |
+| \`calloc(n, size)\` | allocate n * size bytes, zeroed |
+| \`realloc(ptr, size)\` | resize an existing block |
+| \`free(ptr)\` | release memory |
+
+## Program: array of any size
+
+\`\`\`c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    int n;
+    printf("How many elements? ");
+    scanf("%d", &n);
+
+    int *arr = (int *) malloc(n * sizeof(int));
+    if (arr == NULL) {
+        printf("Memory allocation failed\\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++) arr[i] = (i + 1) * 10;
+
+    printf("Values: ");
+    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
+    printf("\\n");
+
+    free(arr);   // always free what you malloc
+    return 0;
+}
+\`\`\`
+
+**Sample run (n = 4)**
+\`\`\`text
+Values: 10 20 30 40
 \`\`\`
 
 :::info
-Our SDK includes built-in retry logic for rate limits and transient errors. You can configure this behavior in the client options.
+Every \`malloc\`/\`calloc\` must be matched by exactly one \`free\` — otherwise you leak memory.
 :::
-    `,
-  },
-  "rate-limiting": {
-    slug: "rate-limiting",
-    title: "Rate Limiting",
-    description: "Understand and work with Acme API rate limits.",
-    category: "Guides",
-    categorySlug: "guides",
-    lastUpdated: "2026-01-05",
-    readingTime: 4,
-    content: `
-# Rate Limiting
+`,
+  ),
 
-Acme API implements rate limiting to ensure fair usage and maintain service stability for all users.
+  structures: A(
+    "structures",
+    "Structures",
+    "Data Structures",
+    "data-structures",
+    "Group different data types under one name.",
+    5,
+    `
+# Structures (\`struct\`)
 
-## Rate Limit Tiers
+A **structure** groups variables of different types under a single name. It is C's way of building a custom record type.
 
-| Plan | Requests/Minute | Requests/Day |
-|------|-----------------|--------------|
-| Free | 60 | 1,000 |
-| Pro | 600 | 50,000 |
-| Enterprise | 6,000 | Unlimited |
+## Declaration
 
-## Rate Limit Headers
-
-Every API response includes headers to help you track your usage:
-
-\`\`\`
-X-RateLimit-Limit: 600
-X-RateLimit-Remaining: 599
-X-RateLimit-Reset: 1704531600
+\`\`\`c
+struct Student {
+    int   roll;
+    char  name[50];
+    float marks;
+};
 \`\`\`
 
-## Handling Rate Limits
+## Creating and using variables
 
-When you exceed the rate limit, the API returns a \`429 Too Many Requests\` response:
-
-\`\`\`json
-{
-  "error": {
-    "code": "rate_limit_exceeded",
-    "message": "Rate limit exceeded. Try again in 45 seconds.",
-    "retryAfter": 45
-  }
-}
+\`\`\`c
+struct Student s1;
+s1.roll = 1;
+strcpy(s1.name, "Aarav");
+s1.marks = 92.5f;
 \`\`\`
 
-### Implementing Backoff
+Or initialize directly:
 
-\`\`\`javascript
-async function apiCallWithBackoff(fn) {
-  try {
-    return await fn();
-  } catch (error) {
-    if (error.code === 'rate_limit_exceeded') {
-      const retryAfter = error.retryAfter || 60;
-      console.log(\`Rate limited. Waiting \${retryAfter}s...\`);
-      await sleep(retryAfter * 1000);
-      return await fn();
-    }
-    throw error;
-  }
-}
+\`\`\`c
+struct Student s2 = {2, "Meera", 88.0f};
 \`\`\`
 
-## Best Practices
+## Pointer to structure
 
-1. **Cache responses**: Reduce API calls by caching data locally
-2. **Use webhooks**: Subscribe to events instead of polling
-3. **Batch requests**: Combine multiple operations when possible
-4. **Monitor usage**: Track your rate limit headers
-5. **Implement queuing**: Queue requests during high traffic periods
-
-## Requesting Higher Limits
-
-Enterprise customers can request custom rate limits. Contact sales@acme.dev to discuss your needs.
-    `,
-  },
-  "webhooks": {
-    slug: "webhooks",
-    title: "Webhooks",
-    description: "Receive real-time notifications when events occur in your account.",
-    category: "Guides",
-    categorySlug: "guides",
-    lastUpdated: "2026-01-04",
-    readingTime: 7,
-    content: `
-# Webhooks
-
-Webhooks allow you to receive real-time notifications when events occur in your Acme account.
-
-## Setting Up Webhooks
-
-### 1. Create a Webhook Endpoint
-
-First, create an endpoint in your application to receive webhook events:
-
-\`\`\`javascript
-import express from 'express';
-
-const app = express();
-
-app.post('/webhooks/acme', express.raw({ type: 'application/json' }), (req, res) => {
-  const event = JSON.parse(req.body);
-  
-  console.log('Received event:', event.type);
-  
-  // Handle the event
-  switch (event.type) {
-    case 'user.created':
-      handleUserCreated(event.data);
-      break;
-    case 'order.completed':
-      handleOrderCompleted(event.data);
-      break;
-  }
-  
-  res.json({ received: true });
-});
+\`\`\`c
+struct Student *p = &s1;
+printf("%s\\n", p->name);   // arrow operator
 \`\`\`
 
-### 2. Register Your Endpoint
+## Program: student record
 
-Register your webhook endpoint in the Acme Dashboard or via API:
+\`\`\`c
+#include <stdio.h>
+#include <string.h>
 
-\`\`\`javascript
-const webhook = await client.webhooks.create({
-  url: 'https://yourapp.com/webhooks/acme',
-  events: ['user.created', 'user.updated', 'order.completed'],
-});
-\`\`\`
-
-## Verifying Signatures
-
-Always verify webhook signatures to ensure requests are from Acme:
-
-\`\`\`javascript
-import crypto from 'crypto';
-
-function verifyWebhookSignature(payload, signature, secret) {
-  const expectedSignature = crypto
-    .createHmac('sha256', secret)
-    .update(payload)
-    .digest('hex');
-    
-  return crypto.timingSafeEqual(
-    Buffer.from(signature),
-    Buffer.from(expectedSignature)
-  );
-}
-
-app.post('/webhooks/acme', express.raw({ type: 'application/json' }), (req, res) => {
-  const signature = req.headers['x-acme-signature'];
-  
-  if (!verifyWebhookSignature(req.body, signature, process.env.WEBHOOK_SECRET)) {
-    return res.status(401).json({ error: 'Invalid signature' });
-  }
-  
-  // Process the verified event
-});
-\`\`\`
-
-## Available Events
-
-| Event | Description |
-|-------|-------------|
-| \`user.created\` | A new user was created |
-| \`user.updated\` | A user was updated |
-| \`user.deleted\` | A user was deleted |
-| \`order.created\` | A new order was placed |
-| \`order.completed\` | An order was fulfilled |
-| \`payment.succeeded\` | A payment was successful |
-| \`payment.failed\` | A payment failed |
-
-## Retry Policy
-
-If your endpoint returns a non-2xx status code, we'll retry the webhook:
-
-- 1st retry: 5 minutes
-- 2nd retry: 30 minutes
-- 3rd retry: 2 hours
-- 4th retry: 24 hours
-
-After 4 failed attempts, the webhook is marked as failed.
-    `,
-  },
-  "pagination": {
-    slug: "pagination",
-    title: "Pagination",
-    description: "Learn how to paginate through large data sets efficiently.",
-    category: "Guides",
-    categorySlug: "guides",
-    lastUpdated: "2026-01-03",
-    readingTime: 4,
-    content: `
-# Pagination
-
-When working with large datasets, Acme API uses cursor-based pagination for optimal performance.
-
-## Basic Pagination
-
-All list endpoints support pagination with \`limit\` and \`offset\` parameters:
-
-\`\`\`javascript
-const users = await client.users.list({
-  limit: 20,   // Number of items per page (max: 100)
-  offset: 0,   // Number of items to skip
-});
-
-console.log(users.data);    // Array of users
-console.log(users.total);   // Total count
-console.log(users.hasMore); // Whether more items exist
-\`\`\`
-
-## Cursor-Based Pagination
-
-For better performance with large datasets, use cursor-based pagination:
-
-\`\`\`javascript
-let cursor = null;
-const allUsers = [];
-
-do {
-  const response = await client.users.list({
-    limit: 100,
-    cursor: cursor,
-  });
-  
-  allUsers.push(...response.data);
-  cursor = response.nextCursor;
-} while (cursor);
-\`\`\`
-
-## Response Format
-
-Paginated responses include metadata:
-
-\`\`\`json
-{
-  "data": [...],
-  "total": 1234,
-  "limit": 20,
-  "offset": 0,
-  "hasMore": true,
-  "nextCursor": "eyJpZCI6MTIzfQ=="
-}
-\`\`\`
-
-## Sorting
-
-Combine pagination with sorting:
-
-\`\`\`javascript
-const users = await client.users.list({
-  limit: 20,
-  sort: 'createdAt:desc',  // or 'name:asc'
-});
-\`\`\`
-
-## Filtering
-
-Apply filters to narrow results:
-
-\`\`\`javascript
-const activeUsers = await client.users.list({
-  limit: 20,
-  filter: {
-    status: 'active',
-    role: 'admin',
-  },
-});
-\`\`\`
-
-## Best Practices
-
-1. **Use reasonable page sizes**: 20-100 items is optimal
-2. **Prefer cursors for large datasets**: More efficient than offset
-3. **Cache total counts**: Avoid recalculating on every request
-4. **Implement infinite scroll**: Better UX for lists
-    `,
-  },
-  "users": {
-    slug: "users",
-    title: "Users API",
-    description: "Complete reference for the Users API endpoints.",
-    category: "API Reference",
-    categorySlug: "api-reference",
-    lastUpdated: "2026-01-06",
-    readingTime: 8,
-    content: `
-# Users API
-
-The Users API allows you to create, read, update, and delete user accounts.
-
-## Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | \`/v1/users\` | List all users |
-| POST | \`/v1/users\` | Create a new user |
-| GET | \`/v1/users/:id\` | Get a user by ID |
-| PATCH | \`/v1/users/:id\` | Update a user |
-| DELETE | \`/v1/users/:id\` | Delete a user |
-
-## User Object
-
-\`\`\`json
-{
-  "id": "usr_1234567890",
-  "email": "john@example.com",
-  "name": "John Doe",
-  "role": "user",
-  "avatar": "https://cdn.acme.dev/avatars/usr_1234567890.jpg",
-  "createdAt": "2026-01-06T10:30:00Z",
-  "updatedAt": "2026-01-06T10:30:00Z"
-}
-\`\`\`
-    `,
-  },
-  "products": {
-    slug: "products",
-    title: "Products API",
-    description: "Complete reference for the Products API endpoints.",
-    category: "API Reference",
-    categorySlug: "api-reference",
-    lastUpdated: "2026-01-05",
-    readingTime: 7,
-    content: `
-# Products API
-
-The Products API allows you to manage your product catalog.
-
-## Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | \`/v1/products\` | List all products |
-| POST | \`/v1/products\` | Create a new product |
-| GET | \`/v1/products/:id\` | Get a product by ID |
-| PATCH | \`/v1/products/:id\` | Update a product |
-| DELETE | \`/v1/products/:id\` | Delete a product |
-
-## Product Object
-
-\`\`\`json
-{
-  "id": "prod_1234567890",
-  "name": "Premium Widget",
-  "description": "A high-quality widget for all your needs",
-  "price": 29.99,
-  "currency": "USD",
-  "inventory": 150,
-  "category": "widgets",
-  "images": [
-    "https://cdn.acme.dev/products/widget-1.jpg"
-  ],
-  "metadata": {},
-  "createdAt": "2026-01-05T10:30:00Z",
-  "updatedAt": "2026-01-05T10:30:00Z"
-}
-\`\`\`
-    `,
-  },
-  "basic-usage": {
-    slug: "basic-usage",
-    title: "Basic Usage",
-    description: "Real-world examples of common Acme API use cases.",
-    category: "Examples",
-    categorySlug: "examples",
-    lastUpdated: "2026-01-04",
-    readingTime: 6,
-    content: `
-# Basic Usage Examples
-
-This guide covers common use cases with complete code examples.
-
-## User Registration Flow
-
-\`\`\`javascript
-import { AcmeClient } from '@acme/api-sdk';
-
-const client = new AcmeClient({
-  apiKey: process.env.ACME_API_KEY,
-});
-
-async function registerUser(email, name, password) {
-  // Create the user
-  const user = await client.users.create({
-    email,
-    name,
-    password,
-    role: 'user',
-  });
-  
-  // Send welcome email
-  await client.emails.send({
-    to: email,
-    template: 'welcome',
-    data: { name },
-  });
-  
-  return user;
-}
-\`\`\`
-
-## Product Catalog with Pagination
-
-\`\`\`javascript
-async function* getAllProducts() {
-  let offset = 0;
-  const limit = 100;
-  
-  while (true) {
-    const response = await client.products.list({
-      limit,
-      offset,
-      sort: 'createdAt:desc',
-    });
-    
-    for (const product of response.data) {
-      yield product;
-    }
-    
-    if (response.data.length < limit) {
-      break;
-    }
-    
-    offset += limit;
-  }
-}
-
-// Usage
-for await (const product of getAllProducts()) {
-  console.log(product.name);
-}
-\`\`\`
-
-## Webhook Handler
-
-\`\`\`javascript
-import express from 'express';
-import { AcmeWebhooks } from '@acme/api-sdk';
-
-const app = express();
-const webhooks = new AcmeWebhooks(process.env.WEBHOOK_SECRET);
-
-app.post('/webhooks/acme', express.raw({ type: 'application/json' }), (req, res) => {
-  const signature = req.headers['x-acme-signature'];
-  
-  try {
-    const event = webhooks.verify(req.body, signature);
-    
-    switch (event.type) {
-      case 'user.created':
-        console.log('New user:', event.data.user);
-        break;
-      case 'order.completed':
-        console.log('Order completed:', event.data.order);
-        break;
-    }
-    
-    res.json({ received: true });
-  } catch (error) {
-    console.error('Webhook error:', error.message);
-    res.status(400).json({ error: 'Invalid signature' });
-  }
-});
-\`\`\`
-
-## Search with Filters
-
-\`\`\`javascript
-async function searchProducts(query, filters = {}) {
-  const products = await client.products.search({
-    query,
-    filters: {
-      category: filters.category,
-      minPrice: filters.minPrice,
-      maxPrice: filters.maxPrice,
-      inStock: filters.inStock ?? true,
-    },
-    sort: 'relevance',
-    limit: 20,
-  });
-  
-  return products;
-}
-
-// Usage
-const results = await searchProducts('widget', {
-  category: 'electronics',
-  minPrice: 10,
-  maxPrice: 100,
-});
-\`\`\`
-    `,
-  },
+struct Student {
+    int   roll;
+    char  name[50];
+    float marks;
 };
 
-// Build search index
-export interface SearchResult {
-  title: string;
-  slug: string;
-  category: string;
-  categorySlug: string;
-  excerpt: string;
-}
+int main(void) {
+    struct Student s;
 
-export function getSearchableContent(): SearchResult[] {
-  return Object.values(articles).map(article => ({
-    title: article.title,
-    slug: article.slug,
-    category: article.category,
-    categorySlug: article.categorySlug,
-    excerpt: article.content.replace(/[#*`]/g, '').substring(0, 200),
-  }));
+    s.roll = 101;
+    strcpy(s.name, "Ravi");
+    s.marks = 87.5f;
+
+    printf("Roll : %d\\n", s.roll);
+    printf("Name : %s\\n", s.name);
+    printf("Marks: %.2f\\n", s.marks);
+    return 0;
 }
+\`\`\`
+
+**Output**
+\`\`\`text
+Roll : 101
+Name : Ravi
+Marks: 87.50
+\`\`\`
+`,
+  ),
+
+  unions: A(
+    "unions",
+    "Unions",
+    "Data Structures",
+    "data-structures",
+    "Multiple members sharing the same memory location.",
+    4,
+    `
+# Unions
+
+A **union** looks like a struct, but **all members share the same memory**. A union is only ever holding one of its members at a time, and its size equals the size of its largest member.
+
+## Declaration
+
+\`\`\`c
+union Data {
+    int   i;
+    float f;
+    char  s[20];
+};
+\`\`\`
+
+## Struct vs Union
+
+| Feature | struct | union |
+|---------|--------|-------|
+| Memory | sum of all members | size of largest member |
+| Active members | all at once | one at a time |
+| Use case | records | space-efficient variants |
+
+## Program: union in action
+
+\`\`\`c
+#include <stdio.h>
+#include <string.h>
+
+union Data {
+    int   i;
+    float f;
+    char  s[20];
+};
+
+int main(void) {
+    union Data d;
+
+    d.i = 42;
+    printf("i = %d\\n", d.i);
+
+    d.f = 3.14f;                 // overwrites i
+    printf("f = %.2f\\n", d.f);
+
+    strcpy(d.s, "Hello union");  // overwrites f
+    printf("s = %s\\n", d.s);
+
+    printf("Size of union = %zu bytes\\n", sizeof(d));
+    return 0;
+}
+\`\`\`
+
+**Output**
+\`\`\`text
+i = 42
+f = 3.14
+s = Hello union
+Size of union = 20 bytes
+\`\`\`
+
+:::info
+Reading a union member other than the one most recently written is generally undefined behavior. Use structs when you need all fields at once.
+:::
+`,
+  ),
+};
 
 export function getArticle(slug: string): DocArticle | undefined {
   return articles[slug];
 }
 
-export function getNextPrevArticles(currentSlug: string): { prev?: { title: string; slug: string }; next?: { title: string; slug: string } } {
-  const allArticles = navigation.flatMap(cat => cat.articles);
-  const currentIndex = allArticles.findIndex(a => a.slug === currentSlug);
-  
+export function getNextPrevArticles(slug: string) {
+  const flat: { title: string; slug: string }[] = [];
+  navigation.forEach((cat) => cat.articles.forEach((a) => flat.push(a)));
+  const idx = flat.findIndex((a) => a.slug === slug);
   return {
-    prev: currentIndex > 0 ? allArticles[currentIndex - 1] : undefined,
-    next: currentIndex < allArticles.length - 1 ? allArticles[currentIndex + 1] : undefined,
+    prev: idx > 0 ? flat[idx - 1] : null,
+    next: idx >= 0 && idx < flat.length - 1 ? flat[idx + 1] : null,
   };
 }

@@ -45,8 +45,8 @@ export function DocsLayout({ children, showToc = false, toc }: DocsLayoutProps) 
             </Button>
             
             <Link to="/" className="flex items-center gap-2 font-bold text-xl">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold">D</div>
-              <span>DocFlow</span>
+              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold font-mono">C</div>
+              <span>C Handbook</span>
             </Link>
           </div>
 
@@ -54,7 +54,7 @@ export function DocsLayout({ children, showToc = false, toc }: DocsLayoutProps) 
           <div className="flex-1 flex justify-center px-4 lg:px-8">
             <Button variant="outline" className="w-full max-w-md justify-start text-muted-foreground" onClick={() => setSearchOpen(true)}>
               <Search className="h-4 w-4 mr-2" />
-              <span>Search documentation...</span>
+              <span>Search topics, functions, keywords...</span>
               <kbd className="hidden sm:inline-flex ml-auto h-5 items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] text-muted-foreground">⌘K</kbd>
             </Button>
           </div>
