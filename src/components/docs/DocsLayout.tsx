@@ -45,8 +45,8 @@ export function DocsLayout({ children, showToc = false, toc }: DocsLayoutProps) 
             </Button>
             
             <Link to="/" className="flex items-center gap-2 font-bold text-xl">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold font-mono">C</div>
-              <span>C Handbook</span>
+              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground text-sm font-bold font-mono shadow-md">{'</>'}</div>
+              <span className="tracking-tight">CodeCraft</span>
             </Link>
           </div>
 
