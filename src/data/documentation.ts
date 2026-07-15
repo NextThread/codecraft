@@ -18,6 +18,17 @@ export interface DocCategory {
 
 export const navigation: DocCategory[] = [
   {
+    title: "Competitive Programming",
+    slug: "competitive-programming",
+    emoji: "🏆",
+    articles: [
+      { title: "Intro to Competitive Programming", slug: "cp-introduction" },
+      { title: "Time Complexity", slug: "time-complexity" },
+      { title: "Space Complexity", slug: "space-complexity" },
+      { title: "Bit Manipulation", slug: "bit-manipulation" },
+    ],
+  },
+  {
     title: "Getting Started",
     slug: "getting-started",
     emoji: "🚀",
@@ -2704,6 +2715,586 @@ float -> 3.50
 
 :::info
 Reading a union member other than the one most recently written is generally undefined behavior. Use a tag field, or use a struct if you need all fields at once.
+:::
+`,
+  ),
+
+  "cp-introduction": A(
+    "cp-introduction",
+    "Intro to Competitive Programming",
+    "Competitive Programming",
+    "competitive-programming",
+    "What competitive programming is, why it helps, and where to practice.",
+    6,
+    `
+# Introduction to Competitive Programming
+
+## What is Competitive Programming?
+
+**Competitive Programming (CP)** is the sport of solving well-defined algorithmic problems within strict **time** and **memory** limits. You are given a problem statement, input/output format, constraints, and you must write a program that produces the correct output for **every** valid input — including the biggest and nastiest ones — fast enough to fit inside the time limit (usually 1–2 seconds).
+
+CP is a mix of three skills:
+
+1. **Math & problem solving** — reduce the problem to a known pattern (greedy, DP, graph, number theory, etc.).
+2. **Algorithms & data structures** — pick the right tool with the right complexity.
+3. **Fast, clean coding** — usually in **C++** because of its speed and STL (\`vector\`, \`map\`, \`set\`, \`sort\`, \`priority_queue\`, ...).
+
+## Why learn Competitive Programming?
+
+- Sharpens your **problem-solving** and **debugging** brain.
+- Builds a strong foundation for **technical interviews** (Google, Meta, Amazon, etc.).
+- Teaches you to think about **complexity, edge cases, overflow, and constraints** — not just "does it work on my example".
+- It's genuinely fun once you start solving.
+
+## The typical workflow
+
+1. Read the problem carefully. Note constraints (\`N ≤ 10^5\`, values up to \`10^9\`, etc.).
+2. Estimate what complexity fits (see the Time Complexity chapter).
+3. Design an algorithm on paper.
+4. Code it (usually in C++).
+5. Test on samples and edge cases.
+6. Submit. If **WA / TLE / RE**, debug and retry.
+
+## Language of choice: C++
+
+Most competitive programmers use **C++** because:
+
+- Very fast execution.
+- Rich **STL** (Standard Template Library).
+- Short, expressive syntax with \`auto\`, range-for, lambdas.
+
+A minimal CP-style C++ template:
+
+\`\`\`cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int &x : a) cin >> x;
+
+    sort(a.begin(), a.end());
+
+    for (int x : a) cout << x << ' ';
+    cout << '\\n';
+    return 0;
+}
+\`\`\`
+
+## Where to practice
+
+Some of the best free judges to practice on:
+
+- [Codeforces](https://codeforces.com/) — regular contests (Div. 4, Div. 3, Div. 2, Div. 1), huge problemset, ratings.
+- [AtCoder](https://atcoder.jp/) — beautifully written problems, weekly Beginner Contests (ABC) are perfect for starting.
+- [LeetCode](https://leetcode.com/) — great for interview-style problems and daily practice.
+- [CSES Problem Set](https://cses.fi/problemset/) — a curated ladder of classic problems by topic.
+
+:::info
+**Suggested path:** solve **Codeforces Div. 4 / ABC A–C** problems until they feel easy, then move up to Div. 3 and ABC D. Do not skip the basics.
+:::
+
+## What we'll cover next
+
+The following chapters build the exact toolkit you need to start solving:
+
+1. **Time Complexity** — how to estimate if your solution will fit in the time limit.
+2. **Space Complexity** — how much memory your algorithm uses.
+3. **Bit Manipulation** — a superpower for tricks, sets, and speedups.
+`,
+  ),
+
+  "time-complexity": A(
+    "time-complexity",
+    "Time Complexity",
+    "Competitive Programming",
+    "competitive-programming",
+    "Big-O, all common growth rates, and how to estimate if your solution fits.",
+    10,
+    `
+# Time Complexity
+
+## What is Time Complexity?
+
+**Time complexity** describes how the number of basic operations an algorithm performs **grows with the input size \`n\`**. We don't care about exact seconds — hardware changes. We care about the **shape** of the growth.
+
+We express it using **asymptotic notation**, most commonly **Big-O**.
+
+## Asymptotic notations
+
+| Notation | Meaning | Bound |
+|----------|---------|-------|
+| **O(f(n))** | Upper bound — worst case grows *at most* like f(n) | ≤ |
+| **Ω(f(n))** | Lower bound — grows *at least* like f(n) | ≥ |
+| **Θ(f(n))** | Tight bound — grows *exactly* like f(n) | = |
+| **o(f(n))** | Strictly smaller than f(n) | < |
+
+In CP we almost always use **Big-O** for the worst case.
+
+## Rules of thumb
+
+1. Drop constants: \`O(3n) = O(n)\`.
+2. Drop lower-order terms: \`O(n^2 + n) = O(n^2)\`.
+3. Different inputs get different variables: \`O(n + m)\`, not \`O(n)\`.
+4. Nested loops multiply. Sequential loops add.
+
+## All common time complexities
+
+Ordered from fastest to slowest:
+
+### 1. O(1) — Constant
+
+Runs in the same time regardless of input.
+
+\`\`\`cpp
+int first = a[0];        // O(1)
+int sum   = a + b;       // O(1)
+\`\`\`
+
+### 2. O(log n) — Logarithmic
+
+Cuts the input roughly in half every step. Classic example: **binary search**.
+
+\`\`\`cpp
+int binary_search(vector<int>& a, int x) {
+    int lo = 0, hi = a.size() - 1;
+    while (lo <= hi) {
+        int mid = (lo + hi) / 2;
+        if (a[mid] == x) return mid;
+        if (a[mid] < x) lo = mid + 1;
+        else            hi = mid - 1;
+    }
+    return -1;
+}
+\`\`\`
+
+### 3. O(√n) — Square root
+
+Common in prime checks and factorization.
+
+\`\`\`cpp
+bool is_prime(int n) {
+    if (n < 2) return false;
+    for (int i = 2; (long long)i * i <= n; ++i)
+        if (n % i == 0) return false;
+    return true;
+}
+\`\`\`
+
+### 4. O(n) — Linear
+
+One pass through the input.
+
+\`\`\`cpp
+int sum = 0;
+for (int x : a) sum += x;   // O(n)
+\`\`\`
+
+### 5. O(n log n) — Linearithmic
+
+The complexity of good sorting algorithms: **merge sort, heap sort, std::sort**.
+
+\`\`\`cpp
+sort(a.begin(), a.end());   // O(n log n)
+\`\`\`
+
+### 6. O(n²) — Quadratic
+
+Two nested loops over the input. Bubble sort, selection sort, checking all pairs.
+
+\`\`\`cpp
+for (int i = 0; i < n; ++i)
+    for (int j = 0; j < n; ++j)
+        if (a[i] + a[j] == target) { /* ... */ }
+\`\`\`
+
+### 7. O(n³) — Cubic
+
+Three nested loops. Floyd–Warshall all-pairs shortest paths.
+
+\`\`\`cpp
+for (int k = 0; k < n; ++k)
+    for (int i = 0; i < n; ++i)
+        for (int j = 0; j < n; ++j)
+            d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
+\`\`\`
+
+### 8. O(2ⁿ) — Exponential
+
+Trying every subset. Naive recursion for the Fibonacci numbers.
+
+\`\`\`cpp
+int fib(int n) {
+    if (n < 2) return n;
+    return fib(n - 1) + fib(n - 2);   // O(2^n)
+}
+\`\`\`
+
+### 9. O(n!) — Factorial
+
+Trying every permutation. Brute-force TSP.
+
+\`\`\`cpp
+do {
+    // evaluate permutation
+} while (next_permutation(a.begin(), a.end()));
+\`\`\`
+
+## Comparing growth rates
+
+\`\`\`text
+O(1) < O(log n) < O(√n) < O(n) < O(n log n) < O(n²) < O(n³) < O(2ⁿ) < O(n!)
+\`\`\`
+
+## What fits in 1 second? (competitive rule of thumb)
+
+Modern judges execute roughly **10⁸ simple operations per second** for C++.
+
+| n (input size) | Max feasible complexity |
+|----------------|-------------------------|
+| n ≤ 10        | O(n!) , O(2ⁿ · n)      |
+| n ≤ 20        | O(2ⁿ · n)               |
+| n ≤ 500       | O(n³)                   |
+| n ≤ 5 000     | O(n²)                   |
+| n ≤ 10⁶      | O(n log n)              |
+| n ≤ 10⁸      | O(n) — barely           |
+| n up to 10¹⁸ | O(log n) or O(1)        |
+
+:::info
+Always **look at the constraints first**. They tell you which complexity you're allowed.
+:::
+
+## Best / Average / Worst case
+
+- **Best case** — the input that makes the algorithm finish fastest.
+- **Average case** — expected behavior on random input.
+- **Worst case** — the input that makes it slowest. **This is what Big-O usually describes.**
+
+Example — **Quick Sort**:
+
+- Best / average: **O(n log n)**
+- Worst: **O(n²)** (bad pivot on already-sorted data)
+
+## Amortized complexity
+
+Sometimes a single operation is expensive, but if you average it over many operations it becomes cheap. Classic example: appending to a **dynamic array** (\`std::vector::push_back\`) is **O(1) amortized**, even though occasional resizes cost O(n).
+
+## Program: measuring complexity empirically
+
+\`\`\`cpp
+#include <bits/stdc++.h>
+#include <chrono>
+using namespace std;
+using namespace chrono;
+
+int main() {
+    for (int n : {1000, 2000, 4000, 8000}) {
+        vector<int> a(n);
+        iota(a.begin(), a.end(), 0);
+        random_shuffle(a.begin(), a.end());
+
+        auto t1 = high_resolution_clock::now();
+        sort(a.begin(), a.end());
+        auto t2 = high_resolution_clock::now();
+
+        cout << "n = " << n << "  time = "
+             << duration_cast<microseconds>(t2 - t1).count()
+             << " us\\n";
+    }
+}
+\`\`\`
+
+Notice the time roughly **doubles** when \`n\` doubles — that's the signature of **O(n log n)**.
+`,
+  ),
+
+  "space-complexity": A(
+    "space-complexity",
+    "Space Complexity",
+    "Competitive Programming",
+    "competitive-programming",
+    "How much extra memory an algorithm needs, and how to shrink it.",
+    6,
+    `
+# Space Complexity
+
+## What is Space Complexity?
+
+**Space complexity** measures the **extra memory** an algorithm uses as a function of the input size \`n\`, again expressed with Big-O. It includes:
+
+- **Input storage** (sometimes counted separately).
+- **Auxiliary space** — arrays, hash maps, recursion stack, etc.
+
+Judges typically give you **256 MB** of memory. Rough sizing:
+
+| Type in C++     | Bytes | 10⁶ items | 10⁸ items |
+|-----------------|-------|-----------|-----------|
+| \`int\`         | 4     | 4 MB      | 400 MB ❌ |
+| \`long long\`   | 8     | 8 MB      | 800 MB ❌ |
+| \`char\` / \`bool\` | 1  | 1 MB      | 100 MB    |
+| \`double\`      | 8     | 8 MB      | 800 MB ❌ |
+
+## Common space complexities
+
+### O(1) — in-place
+
+Uses a fixed number of variables regardless of input.
+
+\`\`\`cpp
+void reverse_inplace(vector<int>& a) {
+    int l = 0, r = a.size() - 1;
+    while (l < r) swap(a[l++], a[r--]);
+}
+\`\`\`
+
+### O(n) — proportional
+
+You allocate an array/hash of size \`n\`.
+
+\`\`\`cpp
+vector<int> prefix(n + 1, 0);
+for (int i = 0; i < n; ++i) prefix[i + 1] = prefix[i] + a[i];
+\`\`\`
+
+### O(n²) — 2D tables
+
+Common in DP on strings/grids.
+
+\`\`\`cpp
+vector<vector<int>> dp(n, vector<int>(n, 0));
+\`\`\`
+
+### O(log n) — recursion stack
+
+Divide-and-conquer where each call halves the input, like binary search implemented recursively.
+
+## Recursion uses memory too
+
+Every recursive call pushes a **stack frame**. A recursion of depth \`n\` costs **O(n)** memory even if you allocate nothing yourself. Deep recursion (\`n = 10⁶\`) can cause **stack overflow** — convert to iteration or increase stack size.
+
+## Time–Space tradeoff
+
+You can often **trade memory for speed** (memoization/DP) or **memory for simpler code** (hash maps instead of clever math).
+
+Example — Fibonacci:
+
+- Naive recursion: **O(2ⁿ) time**, **O(n) space** (call stack).
+- Memoized:       **O(n) time**,   **O(n) space**.
+- Two variables:  **O(n) time**,   **O(1) space**.
+
+\`\`\`cpp
+// O(1) space Fibonacci
+long long fib(int n) {
+    long long a = 0, b = 1;
+    for (int i = 0; i < n; ++i) {
+        long long c = a + b;
+        a = b;
+        b = c;
+    }
+    return a;
+}
+\`\`\`
+
+## Rule of thumb
+
+- Prefer \`vector<int>\` over \`vector<vector<int>>\` when a 1D layout works.
+- Use \`bitset<N>\` for boolean arrays — **8× less memory** than \`bool[]\`.
+- Reuse rolling arrays in DP (\`dp[i]\` only depends on \`dp[i-1]\` → two rows are enough).
+`,
+  ),
+
+  "bit-manipulation": A(
+    "bit-manipulation",
+    "Bit Manipulation",
+    "Competitive Programming",
+    "competitive-programming",
+    "Bitwise operators, tricks, Brian Kernighan's algorithm, and classic problems.",
+    14,
+    `
+# Bit Manipulation
+
+## Why bits?
+
+Every integer in a computer is stored as a sequence of **bits** (0s and 1s). Manipulating those bits directly lets us:
+
+- Do things **extremely fast** (a single CPU instruction).
+- Encode **sets of up to 64 elements** in a single \`long long\`.
+- Solve problems that look hard with clever one-liners.
+
+## Bitwise operators
+
+| Operator | Name | Example (\`a=6=110\`, \`b=3=011\`) | Result |
+|----------|------|------------------------------------|--------|
+| \`&\`  | AND         | \`6 & 3\`   | \`010 = 2\` |
+| \`|\`  | OR          | \`6 \\| 3\` | \`111 = 7\` |
+| \`^\`  | XOR         | \`6 ^ 3\`   | \`101 = 5\` |
+| \`~\`  | NOT         | \`~6\`      | flips all bits |
+| \`<<\` | Left shift  | \`6 << 1\`  | \`1100 = 12\` (× 2) |
+| \`>>\` | Right shift | \`6 >> 1\`  | \`011 = 3\`  (÷ 2) |
+
+## Essential bit tricks
+
+Assume \`x\` is a non-negative integer and \`i\` is a bit position (0 = least significant).
+
+### 1. Check if the i-th bit is set
+\`\`\`cpp
+bool bit_set = (x >> i) & 1;
+\`\`\`
+
+### 2. Set the i-th bit
+\`\`\`cpp
+x |= (1 << i);
+\`\`\`
+
+### 3. Clear the i-th bit
+\`\`\`cpp
+x &= ~(1 << i);
+\`\`\`
+
+### 4. Toggle the i-th bit
+\`\`\`cpp
+x ^= (1 << i);
+\`\`\`
+
+### 5. Check if x is a power of two
+A power of two has exactly one bit set. \`x & (x - 1)\` clears the lowest set bit; if the result is 0 and x > 0, x was a power of two.
+
+\`\`\`cpp
+bool pow2 = x > 0 && (x & (x - 1)) == 0;
+\`\`\`
+
+### 6. Isolate the lowest set bit
+\`\`\`cpp
+int lowest = x & -x;   // two's complement magic
+\`\`\`
+
+### 7. Turn off the lowest set bit
+\`\`\`cpp
+x &= (x - 1);
+\`\`\`
+
+### 8. Multiply / divide by powers of two
+\`\`\`cpp
+int y = x << 3;   // x * 8
+int z = x >> 2;   // x / 4  (for non-negative x)
+\`\`\`
+
+### 9. Swap two numbers without a temp
+\`\`\`cpp
+a ^= b; b ^= a; a ^= b;
+\`\`\`
+
+### 10. XOR properties (memorize these)
+- \`a ^ a = 0\`
+- \`a ^ 0 = a\`
+- XOR is **commutative** and **associative**
+
+Used in the classic *"find the number that appears once when all others appear twice"* trick:
+
+\`\`\`cpp
+int single = 0;
+for (int x : a) single ^= x;   // O(n) time, O(1) space
+\`\`\`
+
+## Counting set bits (popcount)
+
+### Naive: loop through 32 bits
+\`\`\`cpp
+int popcount_naive(unsigned x) {
+    int c = 0;
+    while (x) { c += x & 1; x >>= 1; }
+    return c;
+}
+\`\`\`
+Runs in **O(bits)**, i.e. 32 iterations.
+
+### Brian Kernighan's Algorithm
+
+Key insight: \`x & (x - 1)\` removes the **lowest set bit** of \`x\`. So we loop exactly **as many times as there are set bits** — much faster when the number is sparse.
+
+\`\`\`cpp
+int popcount_bk(unsigned x) {
+    int c = 0;
+    while (x) {
+        x &= (x - 1);   // drop the lowest set bit
+        ++c;
+    }
+    return c;
+}
+\`\`\`
+
+**Complexity:** O(k) where k = number of set bits (≤ 32). This is Brian Kernighan's algorithm.
+
+### Built-in (fastest)
+\`\`\`cpp
+__builtin_popcount(x);        // for unsigned int
+__builtin_popcountll(x);      // for unsigned long long
+\`\`\`
+
+Other useful GCC builtins:
+
+| Builtin | Meaning |
+|---------|---------|
+| \`__builtin_clz(x)\`  | leading zeros |
+| \`__builtin_ctz(x)\`  | trailing zeros |
+| \`__builtin_parity(x)\` | parity of set bits |
+
+## Iterating over subsets of a set (bitmask trick)
+
+Given a bitmask \`m\`, iterate over **every non-empty subset** of \`m\`:
+
+\`\`\`cpp
+for (int s = m; s > 0; s = (s - 1) & m) {
+    // s is a subset of m
+}
+\`\`\`
+Runs in **O(3^n)** total across all masks — the standard trick for subset DP.
+
+## Full-featured program: bit toolkit demo
+
+\`\`\`cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    unsigned x = 29;   // 11101
+
+    cout << "x            = " << bitset<8>(x) << " (" << x << ")\\n";
+    cout << "bit 2 set?   = " << ((x >> 2) & 1) << "\\n";
+    cout << "set   bit 1  = " << bitset<8>(x | (1 << 1)) << "\\n";
+    cout << "clear bit 0  = " << bitset<8>(x & ~(1u << 0)) << "\\n";
+    cout << "toggle bit 3 = " << bitset<8>(x ^ (1 << 3)) << "\\n";
+    cout << "lowest set   = " << (x & -x) << "\\n";
+    cout << "popcount     = " << __builtin_popcount(x) << "\\n";
+    cout << "is pow of 2? = " << (x && !(x & (x - 1))) << "\\n";
+    return 0;
+}
+\`\`\`
+
+## Checking power of k (general idea)
+
+- **Power of 2:** \`x > 0 && (x & (x - 1)) == 0\`.
+- **Power of 4:** power of 2 **and** the single set bit is at an even position → \`x > 0 && (x & (x - 1)) == 0 && (x & 0x55555555) != 0\`.
+- **Power of 3:** no direct bit trick — use the fact that the largest power of 3 that fits in an \`int\` is \`3^19 = 1162261467\`, so \`x > 0 && 1162261467 % x == 0\`.
+
+## Practice problems
+
+Solve these in order — they cover every trick above:
+
+1. [Codeforces 579A — Raising Bacteria](https://codeforces.com/problemset/problem/579/A) — the answer is literally \`__builtin_popcount(n)\`.
+2. [LeetCode — Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/description/) — implement popcount, then optimize with Brian Kernighan.
+3. [LeetCode — Power of Two](https://leetcode.com/problems/power-of-two/) — one-line trick with \`x & (x - 1)\`.
+4. [LeetCode — Power of Three](https://leetcode.com/problems/power-of-three/) — the divisibility trick above.
+5. [LeetCode — Power of Four](https://leetcode.com/problems/power-of-four/) — combine "power of two" with an odd/even bit mask.
+6. [LeetCode — Check if Number is a Sum of Powers of Three](https://leetcode.com/problems/check-if-number-is-a-sum-of-powers-of-three/) — write \`n\` in base 3 and check every digit is 0 or 1.
+
+:::info
+Once these feel easy, hunt tags like **bitmasks**, **dp**, **constructive** on [Codeforces](https://codeforces.com/problemset?tags=bitmasks) and [AtCoder](https://atcoder.jp/) to keep leveling up.
 :::
 `,
   ),
