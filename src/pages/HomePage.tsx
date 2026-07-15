@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Cpu, Layers, Code2, Zap, BookOpen, Terminal, MessageCircle, GraduationCap } from 'lucide-react';
+import { ArrowRight, Cpu, Layers, Code2, Zap, BookOpen, Terminal, MessageCircle, GraduationCap, Trophy, Binary, Timer } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DocsLayout } from '@/components/docs/DocsLayout';
 import { CodeBlock } from '@/components/docs/CodeBlock';
@@ -7,23 +7,29 @@ import { navigation } from '@/data/documentation';
 
 const WHATSAPP_NUMBER = '918787839762';
 const WHATSAPP_MSG = encodeURIComponent(
-  "Hi! I'm interested in online C programming coaching from CodeCraft.",
+  "Hi! I'm interested in online C / C++ / Competitive Programming coaching from CodeCraft.",
 );
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
 
 const features = [
+  { icon: Trophy, title: 'Competitive Programming', description: 'Time & space complexity, bit manipulation, and problem sets from Codeforces / LeetCode / AtCoder.' },
   { icon: BookOpen, title: 'Deep Theory', description: 'Every topic starts with clear, structured explanations — no hand-waving.' },
   { icon: Code2, title: 'Multiple Programs', description: 'Each chapter includes several runnable programs, not just one snippet.' },
-  { icon: Cpu, title: 'From Bits to Structs', description: 'Data types, memory, pointers, structures and unions — covered in order.' },
-  { icon: Terminal, title: 'Standard C, Always', description: 'Every example is standard C, ready to compile with gcc or clang.' },
-  { icon: Layers, title: 'Structured Path', description: 'Chapters flow naturally: basics → control flow → data structures.' },
+  { icon: Binary, title: 'Bit Tricks & Algorithms', description: "Popcount, Brian Kernighan's algorithm, subset iteration and more." },
+  { icon: Cpu, title: 'Full C Language', description: 'From data types and pointers to structures and unions — the classic curriculum.' },
+  { icon: Timer, title: 'Complexity First', description: 'Learn to estimate whether your solution fits before you even code it.' },
+  { icon: Terminal, title: 'Standard C / C++', description: 'Every example is portable, ready to compile with gcc / g++.' },
   { icon: Zap, title: 'Fast Search', description: 'Press ⌘K anywhere to jump straight to the topic you need.' },
 ];
 
-const helloWorld = `#include <stdio.h>
+const helloWorld = `#include <bits/stdc++.h>
+using namespace std;
 
-int main(void) {
-    printf("Hello, CodeCraft!\\n");
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    cout << "Hello, CodeCraft!\\n";
     return 0;
 }`;
 
