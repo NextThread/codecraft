@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Cpu, Layers, Code2, Zap, BookOpen, Terminal, MessageCircle, GraduationCap, Trophy, Binary, Timer } from 'lucide-react';
+import { ArrowRight, Code2, Zap, BookOpen, Terminal, MessageCircle, GraduationCap, Trophy, Binary, Timer, Cpu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DocsLayout } from '@/components/docs/DocsLayout';
 import { CodeBlock } from '@/components/docs/CodeBlock';
