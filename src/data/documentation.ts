@@ -18,6 +18,17 @@ export interface DocCategory {
 
 export const navigation: DocCategory[] = [
   {
+    title: "Competitive Programming",
+    slug: "competitive-programming",
+    emoji: "🏆",
+    articles: [
+      { title: "Intro to Competitive Programming", slug: "cp-introduction" },
+      { title: "Time Complexity", slug: "time-complexity" },
+      { title: "Space Complexity", slug: "space-complexity" },
+      { title: "Bit Manipulation", slug: "bit-manipulation" },
+    ],
+  },
+  {
     title: "Getting Started",
     slug: "getting-started",
     emoji: "🚀",
