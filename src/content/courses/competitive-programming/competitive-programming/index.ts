@@ -1,8 +1,8 @@
 import type { Category } from '@/content/types';
-import cp_introduction from './cp-introduction';
-import time_complexity from './time-complexity';
-import space_complexity from './space-complexity';
-import bit_manipulation from './bit-manipulation';
+import v_cp_introduction from './cp-introduction';
+import v_time_complexity from './time-complexity';
+import v_space_complexity from './space-complexity';
+import v_bit_manipulation from './bit-manipulation';
 
 const category: Category = {
   slug: "competitive-programming",
@@ -11,7 +11,7 @@ const category: Category = {
   courseSlug: "competitive-programming",
   courseTitle: "Competitive Programming",
   defaultDifficulty: "Medium",
-  topics: [cp_introduction, time_complexity, space_complexity, bit_manipulation],
+  topics: [v_cp_introduction, v_time_complexity, v_space_complexity, v_bit_manipulation],
 };
 
 export default category;

@@ -1,7 +1,7 @@
 import type { Category } from '@/content/types';
-import functions from './functions';
-import storage_classes from './storage-classes';
-import recursion from './recursion';
+import v_functions from './functions';
+import v_storage_classes from './storage-classes';
+import v_recursion from './recursion';
 
 const category: Category = {
   slug: "functions",
@@ -10,7 +10,7 @@ const category: Category = {
   courseSlug: "c-programming",
   courseTitle: "C Programming",
   defaultDifficulty: "Easy",
-  topics: [functions, storage_classes, recursion],
+  topics: [v_functions, v_storage_classes, v_recursion],
 };
 
 export default category;

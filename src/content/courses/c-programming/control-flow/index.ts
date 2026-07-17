@@ -1,8 +1,8 @@
 import type { Category } from '@/content/types';
-import if_else from './if-else';
-import switch from './switch';
-import loops from './loops';
-import break_continue from './break-continue';
+import v_if_else from './if-else';
+import v_switch from './switch';
+import v_loops from './loops';
+import v_break_continue from './break-continue';
 
 const category: Category = {
   slug: "control-flow",
@@ -11,7 +11,7 @@ const category: Category = {
   courseSlug: "c-programming",
   courseTitle: "C Programming",
   defaultDifficulty: "Easy",
-  topics: [if_else, switch, loops, break_continue],
+  topics: [v_if_else, v_switch, v_loops, v_break_continue],
 };
 
 export default category;

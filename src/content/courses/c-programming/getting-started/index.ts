@@ -1,7 +1,7 @@
 import type { Category } from '@/content/types';
-import introduction from './introduction';
-import program_structure from './program-structure';
-import first_program from './first-program';
+import v_introduction from './introduction';
+import v_program_structure from './program-structure';
+import v_first_program from './first-program';
 
 const category: Category = {
   slug: "getting-started",
@@ -10,7 +10,7 @@ const category: Category = {
   courseSlug: "c-programming",
   courseTitle: "C Programming",
   defaultDifficulty: "Beginner",
-  topics: [introduction, program_structure, first_program],
+  topics: [v_introduction, v_program_structure, v_first_program],
 };
 
 export default category;
