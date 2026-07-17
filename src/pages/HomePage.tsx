@@ -1,9 +1,26 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Code2, Zap, BookOpen, Terminal, MessageCircle, GraduationCap, Trophy, Binary, Timer, Cpu } from 'lucide-react';
+import { ArrowRight, Code2, Zap, BookOpen, Terminal, MessageCircle, GraduationCap, Trophy, Binary, Timer, Cpu, PlayCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DocsLayout } from '@/components/docs/DocsLayout';
 import { CodeBlock } from '@/components/docs/CodeBlock';
 import { navigation } from '@/data/documentation';
+import { useProgress } from '@/hooks/useProgress';
+import { getTopic } from '@/content';
+
+function ContinueLearningPill() {
+  const { lastVisited, totals } = useProgress();
+  if (!lastVisited) return null;
+  const t = getTopic(lastVisited);
+  if (!t) return null;
+  return (
+    <div className="mt-6 inline-flex items-center gap-3 px-4 py-2 rounded-full border border-border bg-card/70 backdrop-blur text-sm">
+      <PlayCircle className="h-4 w-4 text-primary" />
+      <span className="text-muted-foreground">Continue learning:</span>
+      <Link to={`/docs/${t.slug}`} className="font-medium text-foreground hover:text-primary">{t.title}</Link>
+      <span className="text-xs text-muted-foreground tabular-nums">· {totals.completed}/{totals.total} done</span>
+    </div>
+  );
+}
 
 const WHATSAPP_NUMBER = '918787839762';
 const WHATSAPP_MSG = encodeURIComponent(
@@ -60,7 +77,9 @@ export default function HomePage() {
             <Link to="/docs/introduction">Learn C from Scratch</Link>
           </Button>
         </div>
+        <ContinueLearningPill />
       </section>
+
 
       {/* Hello world */}
       <section className="py-12 lg:py-16">

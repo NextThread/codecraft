@@ -4,21 +4,30 @@ import { DocsLayout } from '@/components/docs/DocsLayout';
 import { TableOfContents } from '@/components/docs/TableOfContents';
 import { CodeBlock } from '@/components/docs/CodeBlock';
 import { Callout } from '@/components/docs/Callout';
+import { ReadingProgressBar } from '@/components/docs/ReadingProgressBar';
+import { TopicMetaBar } from '@/components/docs/TopicMetaBar';
+import { RelatedTopics } from '@/components/docs/RelatedTopics';
+import { TopicStatusControl } from '@/components/docs/TopicStatusControl';
 import { Button } from '@/components/ui/button';
 import { getArticle, getNextPrevArticles } from '@/data/documentation';
+import { getTopic, getCategoryOfTopic } from '@/content';
+import { useProgress } from '@/hooks/useProgress';
 import { useMemo, useState, useEffect } from 'react';
 
 export default function DocsPage() {
   const { slug = 'introduction' } = useParams();
   const navigate = useNavigate();
   const article = getArticle(slug);
+  const topic = getTopic(slug);
+  const category = getCategoryOfTopic(slug);
   const { prev, next } = getNextPrevArticles(slug);
   const [feedback, setFeedback] = useState<'yes' | 'no' | null>(null);
+  const { markVisited } = useProgress();
 
-  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [slug]);
+    if (topic) markVisited(slug);
+  }, [slug, topic, markVisited]);
 
   const renderedContent = useMemo(() => {
     if (!article) return null;
@@ -27,14 +36,13 @@ export default function DocsPage() {
 
   const handleFeedback = (value: 'yes' | 'no') => {
     setFeedback(value);
-    console.log(`Feedback for ${slug}: ${value}`);
   };
 
   const handleNavigation = (targetSlug: string) => {
     navigate(`/docs/${targetSlug}`);
   };
 
-  if (!article) {
+  if (!article || !topic || !category) {
     return (
       <DocsLayout>
         <div className="text-center py-16">
@@ -48,6 +56,7 @@ export default function DocsPage() {
 
   return (
     <DocsLayout showToc toc={<TableOfContents content={article.content} />}>
+      <ReadingProgressBar />
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
         <Link to="/" className="hover:text-foreground">Docs</Link>
@@ -58,16 +67,21 @@ export default function DocsPage() {
       </nav>
 
       {/* Article Header */}
-      <header className="mb-8">
+      <header className="mb-4">
         <h1 className="text-4xl font-bold mb-3">{article.title}</h1>
         <p className="text-muted-foreground">
           Last updated: {new Date(article.lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-          {' · '}{article.readingTime} min read
         </p>
       </header>
 
+      <TopicMetaBar topic={topic} category={category} />
+
       {/* Content */}
       <article className="docs-prose">{renderedContent}</article>
+
+      <TopicStatusControl slug={slug} />
+
+      <RelatedTopics slug={slug} />
 
       {/* Feedback */}
       <div className="flex items-center gap-4 py-8 border-t border-border mt-12">
@@ -90,22 +104,22 @@ export default function DocsPage() {
       </div>
 
       {/* Navigation */}
-      <div className="flex justify-between py-8 border-t border-border">
+      <div className="flex justify-between py-8 border-t border-border gap-4">
         {prev ? (
-          <button 
-            onClick={() => handleNavigation(prev.slug)} 
+          <button
+            onClick={() => handleNavigation(prev.slug)}
             className="group flex items-center gap-2 text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
-            <div><div className="text-xs">Previous</div><div className="font-medium text-foreground">{prev.title}</div></div>
+            <div className="text-left"><div className="text-xs">Previous</div><div className="font-medium text-foreground">{prev.title}</div></div>
           </button>
         ) : <div />}
         {next && (
-          <button 
-            onClick={() => handleNavigation(next.slug)} 
-            className="group flex items-center gap-2 text-right text-muted-foreground hover:text-foreground"
+          <button
+            onClick={() => handleNavigation(next.slug)}
+            className="group flex items-center gap-2 text-right text-muted-foreground hover:text-foreground ml-auto"
           >
-            <div><div className="text-xs">Next</div><div className="font-medium text-foreground">{next.title}</div></div>
+            <div className="text-right"><div className="text-xs">Next</div><div className="font-medium text-foreground">{next.title}</div></div>
             <ArrowRight className="h-4 w-4" />
           </button>
         )}
@@ -123,7 +137,6 @@ function renderMarkdown(content: string) {
   while (i < lines.length) {
     const line = lines[i];
 
-    // Code blocks
     if (line.startsWith('```')) {
       const lang = line.slice(3).trim() || 'text';
       const codeLines: string[] = [];
@@ -137,9 +150,8 @@ function renderMarkdown(content: string) {
       continue;
     }
 
-    // Callouts
     if (line.startsWith(':::')) {
-      const variant = line.slice(3).trim() as 'info' | 'warning' | 'success' | 'error';
+      const variant = (line.slice(3).trim() || 'info') as 'info' | 'warning' | 'success' | 'error' | 'tip' | 'important';
       const calloutLines: string[] = [];
       i++;
       while (i < lines.length && !lines[i].startsWith(':::')) {
@@ -151,7 +163,6 @@ function renderMarkdown(content: string) {
       continue;
     }
 
-    // Headers - Skip h1 since it's already rendered in the page header
     if (line.startsWith('# ') && !line.startsWith('## ')) {
       i++; continue;
     }
@@ -168,7 +179,6 @@ function renderMarkdown(content: string) {
       i++; continue;
     }
 
-    // Lists
     if (line.match(/^[-*]\s/)) {
       const items: string[] = [];
       while (i < lines.length && lines[i].match(/^[-*]\s/)) {
@@ -188,7 +198,6 @@ function renderMarkdown(content: string) {
       continue;
     }
 
-    // Tables
     if (line.includes('|') && lines[i + 1]?.match(/^\|[-:\s|]+\|$/)) {
       const rows: string[][] = [];
       while (i < lines.length && lines[i].includes('|')) {
@@ -208,7 +217,6 @@ function renderMarkdown(content: string) {
       continue;
     }
 
-    // Paragraphs
     if (line.trim()) {
       elements.push(<p key={key++} className="mb-4" dangerouslySetInnerHTML={{ __html: inlineFormat(line) }} />);
     }
