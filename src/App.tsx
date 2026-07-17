@@ -17,7 +17,8 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+
+        <BrowserRouter basename="/codecraft">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/docs/:slug" element={<DocsPage />} />
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>
