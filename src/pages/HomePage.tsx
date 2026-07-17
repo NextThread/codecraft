@@ -60,7 +60,9 @@ export default function HomePage() {
             <Link to="/docs/introduction">Learn C from Scratch</Link>
           </Button>
         </div>
+        <ContinueLearningPill />
       </section>
+
 
       {/* Hello world */}
       <section className="py-12 lg:py-16">
