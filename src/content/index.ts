@@ -4,7 +4,7 @@ import v_c_programming from './courses/c-programming';
 
 export const courses: Course[] = [v_competitive_programming, v_c_programming];
 
-export type { Course, Category, Topic } from './types';
+export type { Course, Category, Topic, TopicMeta, Difficulty } from './types';
 
 // Flatten helpers
 export const allCategories: Category[] = courses.flatMap(c => c.categories);
