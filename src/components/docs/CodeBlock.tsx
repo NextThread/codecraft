@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Check, Copy } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { Check, Copy, ChevronsDownUp, ChevronsUpDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-clike';
@@ -20,65 +20,104 @@ interface CodeBlockProps {
   language?: string;
   showLineNumbers?: boolean;
   className?: string;
+  /** Lines above this collapse behind an Expand button. */
+  collapseAfter?: number;
 }
 
-export function CodeBlock({ code, language = 'javascript', showLineNumbers = false, className }: CodeBlockProps) {
+const LANG_LABEL: Record<string, string> = {
+  cpp: 'C++17', c: 'C', javascript: 'JavaScript', typescript: 'TypeScript',
+  jsx: 'JSX', tsx: 'TSX', python: 'Python', ruby: 'Ruby',
+  bash: 'Bash', json: 'JSON', yaml: 'YAML', text: 'Text',
+};
+
+export function CodeBlock({
+  code,
+  language = 'javascript',
+  showLineNumbers = true,
+  className,
+  collapseAfter = 24,
+}: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  const trimmed = useMemo(() => code.replace(/\n+$/,'').replace(/^\n+/, ''), [code]);
+  const highlighted = useMemo(
+    () => (Prism.languages[language]
+      ? Prism.highlight(trimmed, Prism.languages[language], language)
+      : trimmed),
+    [trimmed, language],
+  );
+  const lines = highlighted.split('\n');
+  const isLong = lines.length > collapseAfter;
+  const shown = isLong && !expanded ? lines.slice(0, collapseAfter) : lines;
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(code);
+    await navigator.clipboard.writeText(trimmed);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), 1800);
   };
 
-  const highlightedCode = Prism.languages[language] 
-    ? Prism.highlight(code.trim(), Prism.languages[language], language)
-    : code.trim();
-
-  const lines = highlightedCode.split('\n');
+  const langLabel = LANG_LABEL[language] ?? language.toUpperCase();
 
   return (
-    <div className={cn("relative group rounded-lg overflow-hidden border border-border", className)}>
-      <div className="absolute top-3 right-3 z-10">
-        <button
-          onClick={handleCopy}
-          className="p-2 rounded-md bg-muted/50 hover:bg-muted transition-all opacity-0 group-hover:opacity-100"
-          aria-label={copied ? "Copied!" : "Copy code"}
-        >
-          {copied ? (
-            <Check className="h-4 w-4 text-success" />
-          ) : (
-            <Copy className="h-4 w-4 text-muted-foreground" />
-          )}
-        </button>
-      </div>
-      
-      <div className="absolute top-3 left-3 z-10">
-        <span className="text-xs text-muted-foreground uppercase tracking-wider font-medium">
-          {language}
+    <div className={cn("relative group rounded-lg overflow-hidden border border-border my-4", className)}>
+      <div className="flex items-center justify-between px-3 py-2 border-b border-border bg-muted/40">
+        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold uppercase tracking-wider text-muted-foreground">
+          <span className="inline-block h-2 w-2 rounded-full bg-primary/60" />
+          {langLabel}
         </span>
-      </div>
-      
-      <pre className="bg-code text-code-foreground p-4 pt-10 overflow-x-auto text-sm font-mono">
-        <code>
-          {showLineNumbers ? (
-            <table className="border-collapse">
-              <tbody>
-                {lines.map((line, index) => (
-                  <tr key={index}>
-                    <td className="pr-4 text-right text-muted-foreground select-none w-8">
-                      {index + 1}
-                    </td>
-                    <td dangerouslySetInnerHTML={{ __html: line || ' ' }} />
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <span dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+        <div className="flex items-center gap-1">
+          {isLong && (
+            <button
+              onClick={() => setExpanded((v) => !v)}
+              className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              aria-label={expanded ? 'Collapse code' : 'Expand code'}
+            >
+              {expanded ? <ChevronsDownUp className="h-3.5 w-3.5" /> : <ChevronsUpDown className="h-3.5 w-3.5" />}
+              <span className="hidden sm:inline">{expanded ? 'Collapse' : `Expand (${lines.length})`}</span>
+            </button>
           )}
-        </code>
-      </pre>
+          <button
+            onClick={handleCopy}
+            className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            aria-label={copied ? 'Copied!' : 'Copy code'}
+          >
+            {copied ? <Check className="h-3.5 w-3.5 text-success" /> : <Copy className="h-3.5 w-3.5" />}
+            <span className="hidden sm:inline">{copied ? 'Copied' : 'Copy'}</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="relative">
+        <pre className="bg-code text-code-foreground overflow-x-auto text-sm font-mono">
+          <code className="block">
+            {showLineNumbers ? (
+              <table className="border-collapse w-full">
+                <tbody>
+                  {shown.map((line, index) => (
+                    <tr key={index} className="align-top">
+                      <td className="pl-4 pr-4 py-0.5 text-right text-muted-foreground/60 select-none w-10 tabular-nums text-xs">
+                        {index + 1}
+                      </td>
+                      <td className="pr-4 py-0.5 whitespace-pre" dangerouslySetInnerHTML={{ __html: line || ' ' }} />
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <span className="block px-4 py-3" dangerouslySetInnerHTML={{ __html: shown.join('\n') }} />
+            )}
+          </code>
+        </pre>
+        {isLong && !expanded && (
+          <button
+            onClick={() => setExpanded(true)}
+            className="absolute inset-x-0 bottom-0 h-16 flex items-end justify-center pb-2 text-xs font-medium text-primary bg-gradient-to-t from-code via-code/90 to-transparent hover:text-primary/80"
+          >
+            Show all {lines.length} lines
+          </button>
+        )}
+      </div>
     </div>
   );
 }
