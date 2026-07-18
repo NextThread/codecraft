@@ -33,10 +33,11 @@ const LANG_LABEL: Record<string, string> = {
 export function CodeBlock({
   code,
   language = 'javascript',
-  showLineNumbers = true,
+  showLineNumbers = false,
   className,
   collapseAfter = 24,
 }: CodeBlockProps) {
+
   const [copied, setCopied] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
