@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ThemeToggle } from './ThemeToggle';
 import { SearchModal } from './SearchModal';
 import { DocsSidebar } from './DocsSidebar';
+import { SiteFooter } from './SiteFooter';
 import { cn } from '@/lib/utils';
 
 interface DocsLayoutProps {
@@ -105,6 +106,8 @@ export function DocsLayout({ children, showToc = false, toc }: DocsLayoutProps) 
           </div>
         </main>
       </div>
+
+      <SiteFooter />
 
       <SearchModal open={searchOpen} onOpenChange={setSearchOpen} />
     </div>
