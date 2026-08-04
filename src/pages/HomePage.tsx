@@ -137,12 +137,19 @@ export default function HomePage() {
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
             Book an online C programming session on WhatsApp and get guided practice, doubt clearing, and interview prep.
           </p>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-            <Button size="sm" className="bg-[#25D366] hover:bg-[#20bd5a] text-white gap-2 shadow-md">
-              <MessageCircle className="h-4 w-4" />
-              Book Online Coaching on WhatsApp
+          <div className="flex flex-wrap justify-center gap-3">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+              <Button size="sm" className="bg-[#25D366] hover:bg-[#20bd5a] text-white gap-2 shadow-md">
+                <MessageCircle className="h-4 w-4" />
+                Book Online Coaching on WhatsApp
+              </Button>
+            </a>
+            <Button size="sm" variant="outline" className="gap-2" asChild>
+              <Link to="/mentor">
+                <GraduationCap className="h-4 w-4" /> View Mentor Profile
+              </Link>
             </Button>
-          </a>
+          </div>
           <p className="text-xs text-muted-foreground mt-3">+91 87878 39762</p>
         </div>
       </section>

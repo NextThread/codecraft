@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import HomePage from "./pages/HomePage";
 import DocsPage from "./pages/DocsPage";
 import ApiReferencePage from "./pages/ApiReferencePage";
+import MentorPage from "./pages/MentorPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
         <BrowserRouter basename="/codecraft">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/mentor" element={<MentorPage />} />
             <Route path="/docs/:slug" element={<DocsPage />} />
             <Route path="/api/:resource" element={<ApiReferencePage />} />
             <Route path="*" element={<NotFound />} />
