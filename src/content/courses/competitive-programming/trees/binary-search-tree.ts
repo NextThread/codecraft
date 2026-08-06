@@ -13,9 +13,9 @@ const topic: Topic = {
 
 A **binary search tree (BST)** keeps the invariant
 
-```
+\`\`\`
 all keys in left subtree  <  node key  <  all keys in right subtree
-```
+\`\`\`
 
 Therefore an **in-order traversal produces sorted keys** — the defining test of a BST.
 
@@ -23,7 +23,7 @@ Therefore an **in-order traversal produces sorted keys** — the defining test o
 |-----------|---------|--------------------|
 | search / insert / delete | O(log n) | O(n) |
 
-Worst case happens with sorted insertions; **self-balancing** trees (AVL, red-black — used by `std::set` / `std::map`, treap, splay) keep the height at O(log n).
+Worst case happens with sorted insertions; **self-balancing** trees (AVL, red-black — used by \`std::set\` / \`std::map\`, treap, splay) keep the height at O(log n).
 
 ### Deletion — three cases
 
@@ -33,7 +33,7 @@ Worst case happens with sorted insertions; **self-balancing** trees (AVL, red-bl
 
 ### Validation
 
-Checking `left < root < right` locally is *not* enough. Either pass down a valid `(low, high)` range, or verify that the in-order traversal is strictly increasing.
+Checking \`left < root < right\` locally is *not* enough. Either pass down a valid \`(low, high)\` range, or verify that the in-order traversal is strictly increasing.
 
 ### Uses
 
@@ -41,7 +41,7 @@ Ordered dictionaries, predecessor/successor queries, floor/ceil, k-th smallest (
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -108,15 +108,15 @@ int main() {
     Node* root = nullptr;
     for (int k : {50, 30, 70, 20, 40, 60, 80}) root = insert(root, k);
 
-    cout << search(root, 40) << ' ' << search(root, 45) << '\n';   // 1 0
-    cout << floorKey(root, 65) << '\n';                            // 60
+    cout << search(root, 40) << ' ' << search(root, 45) << '\\n';   // 1 0
+    cout << floorKey(root, 65) << '\\n';                            // 60
     root = erase(root, 30);
 
     vector<int> v; inorder(root, v);
     for (int x : v) cout << x << ' ';                              // 20 40 50 60 70 80
-    cout << '\n' << boolalpha << isBst(root) << '\n';              // true
+    cout << '\\n' << boolalpha << isBst(root) << '\\n';              // true
 }
-```
+\`\`\`
 `,
 };
 

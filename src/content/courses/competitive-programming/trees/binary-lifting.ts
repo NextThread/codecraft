@@ -11,21 +11,21 @@ const topic: Topic = {
 
 ## Theory
 
-**Binary lifting** precomputes, for every node, its ancestor `2^k` steps up:
+**Binary lifting** precomputes, for every node, its ancestor \`2^k\` steps up:
 
-```
+\`\`\`
 up[0][v] = parent(v)
 up[k][v] = up[k-1][ up[k-1][v] ]
-```
+\`\`\`
 
-Because any integer `k` is a sum of distinct powers of two, the **k-th ancestor** is found by following at most `log n` jumps.
+Because any integer \`k\` is a sum of distinct powers of two, the **k-th ancestor** is found by following at most \`log n\` jumps.
 
 - Preprocess: **O(n log n)** time and memory
 - k-th ancestor / LCA query: **O(log n)**
 
 ### What you can carry along the jumps
 
-Store any *associative* value per jump, e.g. `mx[k][v]` = maximum edge weight on the path from `v` to `up[k][v]`. Then a path query `u → v` splits at the LCA and combines O(log n) precomputed blocks:
+Store any *associative* value per jump, e.g. \`mx[k][v]\` = maximum edge weight on the path from \`v\` to \`up[k][v]\`. Then a path query \`u → v\` splits at the LCA and combines O(log n) precomputed blocks:
 
 - maximum / minimum edge on a path
 - sum of weights (or use root prefix sums)
@@ -42,7 +42,7 @@ Binary lifting works on any **functional graph** (each node has exactly one succ
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -109,11 +109,11 @@ int main() {
     add(0,1,4); add(0,2,2); add(1,3,7); add(1,4,1); add(2,5,9); add(4,6,3);
 
     BinaryLifting bl(n, g, 0);
-    cout << bl.kthAncestor(6, 2) << '\n';   // 1
-    cout << bl.lca(3, 6) << '\n';           // 1
-    cout << bl.maxEdge(3, 5) << '\n';       // 9
+    cout << bl.kthAncestor(6, 2) << '\\n';   // 1
+    cout << bl.lca(3, 6) << '\\n';           // 1
+    cout << bl.maxEdge(3, 5) << '\\n';       // 9
 }
-```
+\`\`\`
 `,
 };
 

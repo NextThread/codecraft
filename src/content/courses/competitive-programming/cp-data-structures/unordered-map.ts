@@ -11,27 +11,27 @@ const topic: Topic = {
 
 ## Theory
 
-`std::unordered_map<K, V>` is a **hash table**: average **O(1)** insert / find / erase, but **O(n)** in the worst case when many keys collide. Keys are stored in no particular order.
+\`std::unordered_map<K, V>\` is a **hash table**: average **O(1)** insert / find / erase, but **O(n)** in the worst case when many keys collide. Keys are stored in no particular order.
 
-| | `map` | `unordered_map` |
+| | \`map\` | \`unordered_map\` |
 |---|---|---|
 | Structure | red-black tree | hash table |
 | Complexity | O(log n) guaranteed | O(1) average, O(n) worst |
 | Order | sorted | arbitrary |
-| `lower_bound` | yes | no |
+| \`lower_bound\` | yes | no |
 | Constant factor | higher per op | lower, but rehashing costs |
 
 ### Performance tips
 
-- `reserve(n)` up front avoids repeated rehashing.
-- `max_load_factor(0.25)` trades memory for speed.
-- For `pair` or `tuple` keys you must supply a custom hash (or encode into a single `long long`: `x * M + y`).
+- \`reserve(n)\` up front avoids repeated rehashing.
+- \`max_load_factor(0.25)\` trades memory for speed.
+- For \`pair\` or \`tuple\` keys you must supply a custom hash (or encode into a single \`long long\`: \`x * M + y\`).
 
 ### Anti-hash attacks
 
-On Codeforces, hacks exist that feed keys colliding under GCC's identity-like hash for `int`, degrading `unordered_map` to O(n²). Defenses:
+On Codeforces, hacks exist that feed keys colliding under GCC's identity-like hash for \`int\`, degrading \`unordered_map\` to O(n²). Defenses:
 
-1. Use `map` (safe, log n), or
+1. Use \`map\` (safe, log n), or
 2. Use a **custom hash with a random seed** (splitmix64), shown below.
 
 ### Typical uses
@@ -42,7 +42,7 @@ On Codeforces, hacks exist that feed keys colliding under GCC's identity-like ha
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -69,14 +69,14 @@ int main() {
     vector<long long> a = {4, 7, 4, 1, 7, 4};
     for (long long x : a) ++cnt[x];
     for (auto& [k, v] : cnt) cout << k << ':' << v << ' ';
-    cout << '\n';                                  // order is arbitrary
+    cout << '\\n';                                  // order is arbitrary
 
     // two-sum in O(n) average
     unordered_map<long long, int, SafeHash> pos;
     long long target = 8;
     for (int i = 0; i < (int)a.size(); ++i) {
         if (auto it = pos.find(target - a[i]); it != pos.end()) {
-            cout << "pair at indices " << it->second << ' ' << i << '\n';
+            cout << "pair at indices " << it->second << ' ' << i << '\\n';
             break;
         }
         pos[a[i]] = i;
@@ -86,9 +86,9 @@ int main() {
     unordered_map<long long, int, SafeHash> grid;
     auto key = [](int x, int y) { return 1LL * x * 1000000 + y; };
     grid[key(3, 5)] = 42;
-    cout << grid[key(3, 5)] << '\n';               // 42
+    cout << grid[key(3, 5)] << '\\n';               // 42
 }
-```
+\`\`\`
 `,
 };
 

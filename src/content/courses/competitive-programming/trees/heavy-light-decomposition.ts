@@ -11,12 +11,12 @@ const topic: Topic = {
 
 ## Theory
 
-**HLD** splits the tree into vertical **chains** so that any root-to-node path crosses at most `O(log n)` chains. Each chain is a contiguous range in a flattened array, so a segment tree over that array answers **path queries with updates**.
+**HLD** splits the tree into vertical **chains** so that any root-to-node path crosses at most \`O(log n)\` chains. Each chain is a contiguous range in a flattened array, so a segment tree over that array answers **path queries with updates**.
 
 ### Building blocks
 
 1. For every node pick the **heavy child** = the child with the largest subtree; all other edges are **light**.
-2. Chains follow heavy edges. Moving up a light edge at least doubles the subtree size → at most `log n` light edges on any root path.
+2. Chains follow heavy edges. Moving up a light edge at least doubles the subtree size → at most \`log n\` light edges on any root path.
 3. A DFS that visits the heavy child first assigns positions so that every chain occupies a contiguous segment.
 
 ### Complexity
@@ -29,7 +29,7 @@ const topic: Topic = {
 
 ### Query pattern
 
-While `head[u] != head[v]`, jump the node whose chain head is deeper to `parent[head[...]]`, combining the segment `[pos[head], pos[node]]`. When both are in the same chain, combine the remaining segment.
+While \`head[u] != head[v]\`, jump the node whose chain head is deeper to \`parent[head[...]]\`, combining the segment \`[pos[head], pos[node]]\`. When both are in the same chain, combine the remaining segment.
 
 For **edge weights**, store each edge's weight at its lower endpoint and skip the LCA itself in the final segment.
 
@@ -39,7 +39,7 @@ Path sum/max/assign with updates, subtree updates combined with path queries, LC
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -114,13 +114,13 @@ int main() {
     vector<long long> val = {5, 3, 8, 1, 9, 2, 7};
     for (int v = 0; v < n; ++v) h.setValue(v, val[v]);
 
-    cout << h.queryPath(3, 6) << '\n';       // max on 3-1-4-6 = 9
-    cout << h.queryPath(3, 5) << '\n';       // max on 3-1-0-2-5 = 8
-    cout << h.querySubtree(1) << '\n';       // max in subtree of 1 = 9
+    cout << h.queryPath(3, 6) << '\\n';       // max on 3-1-4-6 = 9
+    cout << h.queryPath(3, 5) << '\\n';       // max on 3-1-0-2-5 = 8
+    cout << h.querySubtree(1) << '\\n';       // max in subtree of 1 = 9
     h.setValue(3, 100);
-    cout << h.queryPath(3, 5) << '\n';       // 100
+    cout << h.queryPath(3, 5) << '\\n';       // 100
 }
-```
+\`\`\`
 `,
 };
 

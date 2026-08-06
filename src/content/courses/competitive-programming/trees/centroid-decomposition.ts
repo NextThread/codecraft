@@ -11,17 +11,17 @@ const topic: Topic = {
 
 ## Theory
 
-A **centroid** of a tree with `n` nodes is a node whose removal leaves every remaining component with at most `n / 2` nodes. Every tree has one (or two).
+A **centroid** of a tree with \`n\` nodes is a node whose removal leaves every remaining component with at most \`n / 2\` nodes. Every tree has one (or two).
 
 **Centroid decomposition** removes the centroid, recurses into each remaining component, and builds a *centroid tree* whose depth is **O(log n)** — because component sizes at least halve.
 
-```
+\`\`\`
 build(component):
     c = centroid(component)
     process all paths that pass through c
     remove c
     for each remaining component: build(...)
-```
+\`\`\`
 
 Total work: each node appears in O(log n) levels → **O(n log n)** (times the cost per level).
 
@@ -31,21 +31,21 @@ Any path in the tree passes through the centroid of the *highest* level at which
 
 ### Standard problems
 
-- Count pairs at distance exactly / at most `k`.
+- Count pairs at distance exactly / at most \`k\`.
 - Shortest path with at most k edges between all pairs of special nodes.
 - Dynamic "nearest marked node" queries (update and query in O(log n) each via the centroid tree).
 - Sum of distances over all pairs; number of paths whose weight sum is divisible by m.
 
 ### Implementation checklist
 
-1. `computeSizes` in the current component (respecting removed nodes).
-2. Find the centroid by walking towards the heaviest child while it exceeds `total / 2`.
+1. \`computeSizes\` in the current component (respecting removed nodes).
+2. Find the centroid by walking towards the heaviest child while it exceeds \`total / 2\`.
 3. Process paths through the centroid — usually "count all, subtract per-child overcount".
 4. Mark the centroid removed and recurse.
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -77,7 +77,7 @@ struct CentroidDecomposition {
         for (int to : g[v])
             if (to != p && !removed[to]) collect(to, v, d + 1, out);
     }
-    // number of pairs (i, j) in `ds` with ds[i] + ds[j] <= K
+    // number of pairs (i, j) in \`ds\` with ds[i] + ds[j] <= K
     long long countPairs(vector<int> ds) {
         sort(ds.begin(), ds.end());
         long long res = 0;
@@ -113,9 +113,9 @@ int main() {
     cd.addEdge(0,1); cd.addEdge(0,2); cd.addEdge(1,3);
     cd.addEdge(1,4); cd.addEdge(2,5); cd.addEdge(4,6);
     cd.build(0);
-    cout << "pairs with distance <= " << K << ": " << cd.pairsAtMostK << '\n';
+    cout << "pairs with distance <= " << K << ": " << cd.pairsAtMostK << '\\n';
 }
-```
+\`\`\`
 `,
 };
 

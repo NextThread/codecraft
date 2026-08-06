@@ -18,20 +18,20 @@ For a **static** array (no updates), a sparse table answers range queries extrem
 
 ### Construction
 
-`table[k][i]` = answer for the segment `[i, i + 2^k - 1]`.
+\`table[k][i]\` = answer for the segment \`[i, i + 2^k - 1]\`.
 
-```
+\`\`\`
 table[0][i] = a[i]
 table[k][i] = merge(table[k-1][i], table[k-1][i + 2^(k-1)])
-```
+\`\`\`
 
 ### O(1) query (idempotent merge)
 
-Let `k = floor(log2(r - l + 1))`. The two blocks `[l, l+2^k-1]` and `[r-2^k+1, r]` cover `[l, r]` and may overlap — harmless for min/max/gcd because overlapping does not change the result.
+Let \`k = floor(log2(r - l + 1))\`. The two blocks \`[l, l+2^k-1]\` and \`[r-2^k+1, r]\` cover \`[l, r]\` and may overlap — harmless for min/max/gcd because overlapping does not change the result.
 
-```cpp
+\`\`\`cpp
 answer = merge(table[k][l], table[k][r - (1 << k) + 1]);
-```
+\`\`\`
 
 For sums, overlap breaks the answer, so you must use disjoint blocks → O(log n) per query.
 
@@ -48,7 +48,7 @@ Also the standard tool for **LCA via Euler tour + RMQ** and for binary lifting t
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -97,15 +97,15 @@ struct SparseGcd {
 int main() {
     vector<int> a = {5, 2, 4, 7, 1, 9, 3};
     SparseTable sp(a);
-    cout << sp.queryMin(0, 3) << '\n';    // 2
-    cout << sp.queryMin(3, 6) << '\n';    // 1
-    cout << sp.queryMin(5, 5) << '\n';    // 9
+    cout << sp.queryMin(0, 3) << '\\n';    // 2
+    cout << sp.queryMin(3, 6) << '\\n';    // 1
+    cout << sp.queryMin(5, 5) << '\\n';    // 9
 
     SparseGcd sg({12, 18, 24, 9});
-    cout << sg.query(0, 2) << '\n';       // 6
-    cout << sg.query(2, 3) << '\n';       // 3
+    cout << sg.query(0, 2) << '\\n';       // 6
+    cout << sg.query(2, 3) << '\\n';       // 3
 }
-```
+\`\`\`
 `,
 };
 

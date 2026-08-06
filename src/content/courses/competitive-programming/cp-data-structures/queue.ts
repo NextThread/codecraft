@@ -13,15 +13,15 @@ const topic: Topic = {
 
 A **queue** is First-In-First-Out: you push at the back and pop from the front. All operations are O(1).
 
-- `push(x)` / `enqueue`
-- `pop()` / `dequeue`
-- `front()`, `back()`, `size()`, `empty()`
+- \`push(x)\` / \`enqueue\`
+- \`pop()\` / \`dequeue\`
+- \`front()\`, \`back()\`, \`size()\`, \`empty()\`
 
 ### Implementations
 
-- **Circular buffer** over an array: keep `head`, `tail` indices modulo capacity — no shifting.
+- **Circular buffer** over an array: keep \`head\`, \`tail\` indices modulo capacity — no shifting.
 - **Linked list**: keep pointers to both ends.
-- `std::queue<T>` (adapter over `std::deque`) in C++.
+- \`std::queue<T>\` (adapter over \`std::deque\`) in C++.
 
 ### Where queues appear
 
@@ -32,7 +32,7 @@ A **queue** is First-In-First-Out: you push at the back and pop from the front. 
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -75,16 +75,16 @@ vector<int> bfs(const vector<vector<int>>& g, int src) {
 int main() {
     CircularQueue cq(3);
     cq.push(1); cq.push(2); cq.push(3);
-    cout << cq.front() << '\n';          // 1
+    cout << cq.front() << '\\n';          // 1
     cq.pop(); cq.push(4);                // wraps around
     while (!cq.empty()) { cout << cq.front() << ' '; cq.pop(); }
-    cout << '\n';                        // 2 3 4
+    cout << '\\n';                        // 2 3 4
 
     vector<vector<int>> g = {{1,2},{0,3},{0},{1,4},{3}};
     for (int d : bfs(g, 0)) cout << d << ' ';   // 0 1 1 2 3
-    cout << '\n';
+    cout << '\\n';
 }
-```
+\`\`\`
 `,
 };
 

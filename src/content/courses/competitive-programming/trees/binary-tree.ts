@@ -11,7 +11,7 @@ const topic: Topic = {
 
 ## Theory
 
-A **binary tree** is a rooted tree where every node has at most two children (`left`, `right`).
+A **binary tree** is a rooted tree where every node has at most two children (\`left\`, \`right\`).
 
 ### Terminology
 
@@ -32,10 +32,10 @@ A **binary tree** is a rooted tree where every node has at most two children (`l
 
 ### Useful facts
 
-- A perfect tree of height `h` has `2^(h+1) - 1` nodes and `2^h` leaves.
-- A tree with `n` nodes has `n - 1` edges.
-- Minimum height with n nodes = `floor(log2 n)`; maximum = `n - 1`.
-- A **complete** binary tree can be stored in an array: children of `i` are `2i + 1`, `2i + 2` (this is what heaps use).
+- A perfect tree of height \`h\` has \`2^(h+1) - 1\` nodes and \`2^h\` leaves.
+- A tree with \`n\` nodes has \`n - 1\` edges.
+- Minimum height with n nodes = \`floor(log2 n)\`; maximum = \`n - 1\`.
+- A **complete** binary tree can be stored in an array: children of \`i\` are \`2i + 1\`, \`2i + 2\` (this is what heaps use).
 
 ### Common problems
 
@@ -43,7 +43,7 @@ Height, node/leaf count, diameter, mirror/invert, check balanced, level-order (B
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -103,15 +103,15 @@ int main() {
     root->left = new Node(2); root->right = new Node(3);
     root->left->left = new Node(4); root->left->right = new Node(5);
 
-    cout << height(root) << ' ' << countNodes(root) << ' ' << countLeaves(root) << '\n'; // 3 5 3
+    cout << height(root) << ' ' << countNodes(root) << ' ' << countLeaves(root) << '\\n'; // 3 5 3
     int d = 0; diameterDfs(root, d);
-    cout << "diameter = " << d << '\n';        // 3
+    cout << "diameter = " << d << '\\n';        // 3
     for (auto& lvl : levelOrder(root)) { for (int v : lvl) cout << v << ' '; cout << "| "; }
-    cout << '\n';                               // 1 | 2 3 | 4 5 |
+    cout << '\\n';                               // 1 | 2 3 | 4 5 |
     invert(root);
-    cout << root->left->val << '\n';            // 3
+    cout << root->left->val << '\\n';            // 3
 }
-```
+\`\`\`
 `,
 };
 

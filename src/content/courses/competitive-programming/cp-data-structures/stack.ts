@@ -13,11 +13,11 @@ const topic: Topic = {
 
 A **stack** is a Last-In-First-Out container: you only touch the top.
 
-- `push(x)` — add on top — O(1)
-- `pop()` — remove top — O(1)
-- `top()` — inspect top — O(1)
+- \`push(x)\` — add on top — O(1)
+- \`pop()\` — remove top — O(1)
+- \`top()\` — inspect top — O(1)
 
-It can be implemented over an array (index of the top) or a linked list. In C++ use `std::stack<T>` (adapter over `deque` by default) or simply a `vector` with `push_back`/`pop_back`, which is faster.
+It can be implemented over an array (index of the top) or a linked list. In C++ use \`std::stack<T>\` (adapter over \`deque\` by default) or simply a \`vector\` with \`push_back\`/\`pop_back\`, which is faster.
 
 ### Where stacks appear
 
@@ -31,11 +31,11 @@ It can be implemented over an array (index of the top) or a linked list. In C++ 
 
 ### Monotonic stack idea
 
-Scan left to right; before pushing `a[i]`, pop everything that can no longer be an answer (e.g. all elements `<= a[i]` when looking for the next greater element). Each element is pushed and popped at most once → amortized O(1) per element.
+Scan left to right; before pushing \`a[i]\`, pop everything that can no longer be an answer (e.g. all elements \`<= a[i]\` when looking for the next greater element). Each element is pushed and popped at most once → amortized O(1) per element.
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -88,11 +88,11 @@ long long largestRectangle(vector<int> h) {
 int main() {
     vector<int> a = {2, 1, 5, 6, 2, 3};
     for (int x : nextGreater(a)) cout << x << ' ';    // 5 5 6 -1 3 -1
-    cout << '\n';
-    cout << balanced("{[()]}") << '\n';               // 1
-    cout << largestRectangle(a) << '\n';              // 10
+    cout << '\\n';
+    cout << balanced("{[()]}") << '\\n';               // 1
+    cout << largestRectangle(a) << '\\n';              // 10
 }
-```
+\`\`\`
 `,
 };
 

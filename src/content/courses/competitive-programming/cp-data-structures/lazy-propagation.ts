@@ -19,26 +19,26 @@ A plain segment tree updates one position at a time. To update a whole range in 
 2. **push(node)** — hand the pending value to both children and clear it.
 3. **pull(node)** — recompute the node from its children.
 
-A range update stops at every node fully inside `[ql, qr]`, marks it, and returns — that is why only O(log n) nodes are ever touched.
+A range update stops at every node fully inside \`[ql, qr]\`, marks it, and returns — that is why only O(log n) nodes are ever touched.
 
 ### Two common flavours
 
 | Update | Aggregate | Compose lazies |
 |--------|-----------|----------------|
-| range **add** | sum / min / max | add: `lz += x` |
-| range **assign** | sum / min / max | assign overwrites: `lz = x` |
+| range **add** | sum / min / max | add: \`lz += x\` |
+| range **assign** | sum / min / max | assign overwrites: \`lz = x\` |
 
 Mixing add and assign requires an ordered composition (an assign clears a pending add).
 
 ### Correctness rules
 
 - Composition must be associative: applying lazies in order must equal applying the composed lazy.
-- Never forget to `push` before descending, and `pull` after returning.
-- For `min`/`max` with range add, `apply` is simply `t[v] += x` (no length factor); for sums it is `t[v] += x * len`.
+- Never forget to \`push\` before descending, and \`pull\` after returning.
+- For \`min\`/\`max\` with range add, \`apply\` is simply \`t[v] += x\` (no length factor); for sums it is \`t[v] += x * len\`.
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -90,14 +90,14 @@ struct LazySeg {
 int main() {
     vector<long long> a = {1, 2, 3, 4, 5};
     LazySeg st(a);
-    cout << st.query(0, 4) << '\n';    // 15
+    cout << st.query(0, 4) << '\\n';    // 15
     st.update(1, 3, 10);               // a = 1 12 13 14 5
-    cout << st.query(0, 4) << '\n';    // 45
-    cout << st.query(1, 2) << '\n';    // 25
+    cout << st.query(0, 4) << '\\n';    // 45
+    cout << st.query(1, 2) << '\\n';    // 25
     st.update(0, 0, -1);
-    cout << st.query(0, 1) << '\n';    // 12
+    cout << st.query(0, 1) << '\\n';    // 12
 }
-```
+\`\`\`
 `,
 };
 

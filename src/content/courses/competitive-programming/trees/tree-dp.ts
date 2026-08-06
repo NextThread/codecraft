@@ -13,19 +13,19 @@ const topic: Topic = {
 
 **Tree DP** computes an answer for every node from the answers of its children — a DFS in **postorder**, O(n) overall.
 
-```
+\`\`\`
 dp[v] = f(dp[c1], dp[c2], ..., dp[ck])
-```
+\`\`\`
 
 ### Classic formulations
 
 | Problem | Recurrence |
 |---------|-----------|
-| Subtree size | `sz[v] = 1 + Σ sz[c]` |
-| Subtree sum | `sum[v] = a[v] + Σ sum[c]` |
-| Height | `h[v] = 1 + max h[c]` |
-| Diameter | for each `v`, combine the two largest child heights |
-| Max independent set | `dp[v][0] = Σ max(dp[c][0], dp[c][1])`, `dp[v][1] = a[v] + Σ dp[c][0]` |
+| Subtree size | \`sz[v] = 1 + Σ sz[c]\` |
+| Subtree sum | \`sum[v] = a[v] + Σ sum[c]\` |
+| Height | \`h[v] = 1 + max h[c]\` |
+| Diameter | for each \`v\`, combine the two largest child heights |
+| Max independent set | \`dp[v][0] = Σ max(dp[c][0], dp[c][1])\`, \`dp[v][1] = a[v] + Σ dp[c][0]\` |
 | Minimum vertex cover | same 0/1 shape with the roles swapped |
 | Counting paths of length k | knapsack merge over children (small-to-large gives O(n·k)) |
 
@@ -33,9 +33,9 @@ dp[v] = f(dp[c1], dp[c2], ..., dp[ck])
 
 To get the answer *for every node as the root* in O(n):
 
-1. First DFS — `down[v]`: the answer inside v's subtree.
-2. Second DFS — `up[v]`: the answer from the rest of the tree, computed from the parent using prefix/suffix aggregates over siblings (so removing one child costs O(1)).
-3. `answer[v] = combine(down[v], up[v])`.
+1. First DFS — \`down[v]\`: the answer inside v's subtree.
+2. Second DFS — \`up[v]\`: the answer from the rest of the tree, computed from the parent using prefix/suffix aggregates over siblings (so removing one child costs O(1)).
+3. \`answer[v] = combine(down[v], up[v])\`.
 
 Typical application: sum of distances from every node to all others.
 
@@ -46,7 +46,7 @@ Typical application: sum of distances from every node to all others.
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -94,15 +94,15 @@ int main() {
     a = {3, 2, 1, 10, 1, 4, 5};
     dp.assign(n, {0, 0});
     dfsMis(0, -1);
-    cout << "max independent set = " << max(dp[0][0], dp[0][1]) << '\n';   // 22
+    cout << "max independent set = " << max(dp[0][0], dp[0][1]) << '\\n';   // 22
 
     sz.assign(n, 0); down.assign(n, 0); ans.assign(n, 0);
     dfsDown(0, -1);
     ans[0] = down[0];
     dfsUp(0, -1);
-    for (int v = 0; v < n; ++v) cout << "sum of distances from " << v << " = " << ans[v] << '\n';
+    for (int v = 0; v < n; ++v) cout << "sum of distances from " << v << " = " << ans[v] << '\\n';
 }
-```
+\`\`\`
 `,
 };
 

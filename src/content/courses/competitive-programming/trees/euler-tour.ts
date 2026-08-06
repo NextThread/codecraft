@@ -15,10 +15,10 @@ An **Euler tour** flattens a tree into an array so that tree queries become *ran
 
 ### Flavour 1 — entry/exit times (subtree ranges)
 
-During a DFS record `tin[v]` when entering and `tout[v]` when leaving:
+During a DFS record \`tin[v]\` when entering and \`tout[v]\` when leaving:
 
-- The subtree of `v` occupies exactly the contiguous range `[tin[v], tout[v]]`.
-- `u` is an ancestor of `v` ⟺ `tin[u] <= tin[v] && tout[v] <= tout[u]` — an **O(1) ancestor test**.
+- The subtree of \`v\` occupies exactly the contiguous range \`[tin[v], tout[v]]\`.
+- \`u\` is an ancestor of \`v\` ⟺ \`tin[u] <= tin[v] && tout[v] <= tout[u]\` — an **O(1) ancestor test**.
 
 This gives:
 - subtree sum / min / max / count with a segment tree or BIT,
@@ -29,19 +29,19 @@ This gives:
 
 Append the node every time you touch it (before and after each child). Then
 
-```
+\`\`\`
 lca(u, v) = the node of minimum depth in the tour between first[u] and first[v]
-```
+\`\`\`
 
 which is a **range-minimum query** — O(1) with a sparse table after O(n log n) preprocessing.
 
 ### Flavour 3 — edge tour (path sums)
 
-Add `+w` at `tin[v]` and `−w` at `tout[v]+1`; a prefix sum then gives the root-to-node distance, so path updates/queries reduce to range operations.
+Add \`+w\` at \`tin[v]\` and \`−w\` at \`tout[v]+1\`; a prefix sum then gives the root-to-node distance, so path updates/queries reduce to range operations.
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -89,10 +89,10 @@ int main() {
 
     EulerTour et(g, 0);
     for (int v = 0; v < n; ++v)
-        cout << "node " << v << ": [" << et.tin[v] << ", " << et.tout[v] << "]\n";
+        cout << "node " << v << ": [" << et.tin[v] << ", " << et.tout[v] << "]\\n";
 
-    cout << boolalpha << et.isAncestor(1, 6) << ' ' << et.isAncestor(2, 6) << '\n'; // true false
-    cout << et.lcaBruteRmq(3, 6) << '\n';    // 1
+    cout << boolalpha << et.isAncestor(1, 6) << ' ' << et.isAncestor(2, 6) << '\\n'; // true false
+    cout << et.lcaBruteRmq(3, 6) << '\\n';    // 1
 
     // subtree sum using the flattened array + prefix sums
     vector<long long> value(n, 1), flatVal(n);
@@ -100,9 +100,9 @@ int main() {
     vector<long long> pre(n + 1, 0);
     for (int i = 0; i < n; ++i) pre[i+1] = pre[i] + flatVal[i];
     int v = 1;
-    cout << "subtree size of 1 = " << pre[et.tout[v] + 1] - pre[et.tin[v]] << '\n';  // 4
+    cout << "subtree size of 1 = " << pre[et.tout[v] + 1] - pre[et.tin[v]] << '\\n';  // 4
 }
-```
+\`\`\`
 `,
 };
 

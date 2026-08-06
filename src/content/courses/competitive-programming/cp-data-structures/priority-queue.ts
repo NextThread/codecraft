@@ -13,11 +13,11 @@ const topic: Topic = {
 
 A **priority queue** always gives you the element with the highest priority. It is normally implemented as a **binary heap**: a complete binary tree stored in an array where
 
-```
+\`\`\`
 parent(i) = (i - 1) / 2      left(i) = 2i + 1      right(i) = 2i + 2
-```
+\`\`\`
 
-**Max-heap property:** every parent is `>=` its children.
+**Max-heap property:** every parent is \`>=\` its children.
 
 | Operation | Complexity |
 |-----------|-----------|
@@ -26,7 +26,7 @@ parent(i) = (i - 1) / 2      left(i) = 2i + 1      right(i) = 2i + 2
 | pop (sift down) | O(log n) |
 | build from n items | **O(n)** |
 
-`std::priority_queue<T>` is a max-heap by default; a min-heap is `priority_queue<T, vector<T>, greater<T>>`.
+\`std::priority_queue<T>\` is a max-heap by default; a min-heap is \`priority_queue<T, vector<T>, greater<T>>\`.
 
 ### Uses
 
@@ -35,11 +35,11 @@ parent(i) = (i - 1) / 2      left(i) = 2i + 1      right(i) = 2i + 2
 - **Merging k sorted lists**, external sorting.
 - Scheduling by deadline/cost, Huffman coding, "median of a stream" with two heaps.
 
-Note: a heap gives no ordered iteration and no O(log n) search for arbitrary values — use a `set` for that.
+Note: a heap gives no ordered iteration and no O(log n) search for arbitrary values — use a \`set\` for that.
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -95,20 +95,20 @@ int main() {
     MaxHeap mh;
     for (int v : {5, 1, 9, 3, 7}) mh.push(v);
     while (!mh.empty()) { cout << mh.top() << ' '; mh.pop(); }   // 9 7 5 3 1
-    cout << '\n';
+    cout << '\\n';
 
     // k-th largest with a min-heap of size k
     vector<int> a = {7, 10, 4, 3, 20, 15};
     int k = 3;
     priority_queue<int, vector<int>, greater<>> pq;
     for (int x : a) { pq.push(x); if ((int)pq.size() > k) pq.pop(); }
-    cout << "3rd largest = " << pq.top() << '\n';                // 10
+    cout << "3rd largest = " << pq.top() << '\\n';                // 10
 
     vector<vector<pair<int,int>>> g = {{{1,4},{2,1}},{{3,1}},{{1,2},{3,5}},{}};
     for (long long d : dijkstra(g, 0)) cout << d << ' ';         // 0 3 1 4
-    cout << '\n';
+    cout << '\\n';
 }
-```
+\`\`\`
 `,
 };
 

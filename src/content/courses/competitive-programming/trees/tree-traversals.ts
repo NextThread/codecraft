@@ -42,7 +42,7 @@ In competitive programming the same three orders on a general (rooted) tree give
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -122,18 +122,18 @@ int main() {
 
     vector<int> a, b, c;
     preorder(root, a); inorder(root, b); postorder(root, c);
-    for (int x : a) cout << x << ' '; cout << '\n';   // 1 2 4 5 3
-    for (int x : b) cout << x << ' '; cout << '\n';   // 4 2 5 1 3
-    for (int x : c) cout << x << ' '; cout << '\n';   // 4 5 2 3 1
-    for (int x : iterativeInorder(root)) cout << x << ' '; cout << '\n';
-    for (int x : levelOrder(root)) cout << x << ' ';  cout << '\n';   // 1 2 3 4 5
+    for (int x : a) cout << x << ' '; cout << '\\n';   // 1 2 4 5 3
+    for (int x : b) cout << x << ' '; cout << '\\n';   // 4 2 5 1 3
+    for (int x : c) cout << x << ' '; cout << '\\n';   // 4 5 2 3 1
+    for (int x : iterativeInorder(root)) cout << x << ' '; cout << '\\n';
+    for (int x : levelOrder(root)) cout << x << ' ';  cout << '\\n';   // 1 2 3 4 5
 
     unordered_map<int,int> pos;
     for (int i = 0; i < (int)b.size(); ++i) pos[b[i]] = i;
     Node* rebuilt = build(a, b, 0, a.size()-1, 0, b.size()-1, pos);
-    for (int x : levelOrder(rebuilt)) cout << x << ' '; cout << '\n';  // 1 2 3 4 5
+    for (int x : levelOrder(rebuilt)) cout << x << ' '; cout << '\\n';  // 1 2 3 4 5
 }
-```
+\`\`\`
 `,
 };
 

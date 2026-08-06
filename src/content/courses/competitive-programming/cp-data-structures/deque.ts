@@ -13,23 +13,23 @@ const topic: Topic = {
 
 A **deque** (double-ended queue) supports O(1) insertion and removal at *both* ends, plus O(1) random access.
 
-`std::deque<T>` is implemented as a list of fixed-size blocks, so:
+\`std::deque<T>\` is implemented as a list of fixed-size blocks, so:
 
-- `push_front`, `push_back`, `pop_front`, `pop_back`, `operator[]` — all O(1)
+- \`push_front\`, \`push_back\`, \`pop_front\`, \`pop_back\`, \`operator[]\` — all O(1)
 - Insertion in the middle — O(n)
-- Slightly slower than `vector` for pure iteration (indirection), but far better than shifting.
+- Slightly slower than \`vector\` for pure iteration (indirection), but far better than shifting.
 
 ### Key applications
 
 - **Sliding window minimum/maximum** in O(n) using a *monotonic deque*.
 - **0-1 BFS**: edges of weight 0 go to the front, weight 1 to the back — Dijkstra in O(V + E).
 - Palindrome checks, undo/redo, work-stealing schedulers.
-- Underlying container of `std::queue` and `std::stack`.
+- Underlying container of \`std::queue\` and \`std::stack\`.
 
 ### Monotonic deque for window maximum
 
 Store indices with strictly decreasing values. For each new element:
-1. Pop from the back while the back value is `<=` the new value (it can never be a maximum again).
+1. Pop from the back while the back value is \`<=\` the new value (it can never be a maximum again).
 2. Push the new index.
 3. Pop from the front if it left the window.
 4. The front is the maximum of the current window.
@@ -38,7 +38,7 @@ Each index enters and leaves once → O(n) total.
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -77,13 +77,13 @@ vector<int> zeroOneBfs(const vector<vector<pair<int,int>>>& g, int src) {
 int main() {
     vector<int> a = {1, 3, -1, -3, 5, 3, 6, 7};
     for (int x : slidingMax(a, 3)) cout << x << ' ';   // 3 3 5 5 6 7
-    cout << '\n';
+    cout << '\\n';
 
     vector<vector<pair<int,int>>> g = {{{1,0},{2,1}},{{2,0}},{{3,1}},{}};
     for (int d : zeroOneBfs(g, 0)) cout << d << ' ';   // 0 0 0 1
-    cout << '\n';
+    cout << '\\n';
 }
-```
+\`\`\`
 `,
 };
 

@@ -13,9 +13,9 @@ const topic: Topic = {
 
 A **linked list** stores elements in separately allocated nodes; each node keeps the data plus a pointer to the next (and optionally previous) node.
 
-```
+\`\`\`
 head -> [1|*] -> [2|*] -> [3|null]
-```
+\`\`\`
 
 | Operation | Array | Linked List |
 |-----------|-------|-------------|
@@ -26,21 +26,21 @@ head -> [1|*] -> [2|*] -> [3|null]
 
 ### Variants
 
-- **Singly linked** — one `next` pointer. Minimal memory.
-- **Doubly linked** — `next` + `prev`, allows backward traversal and O(1) erase given an iterator (`std::list`).
+- **Singly linked** — one \`next\` pointer. Minimal memory.
+- **Doubly linked** — \`next\` + \`prev\`, allows backward traversal and O(1) erase given an iterator (\`std::list\`).
 - **Circular** — last node points back to head; useful for round-robin (Josephus problem).
 
 ### Classic techniques
 
 - **Two pointers (slow/fast)** — find middle, detect a cycle (Floyd), find k-th from end.
-- **Reversal** — iteratively rewire `next` pointers; base of "reverse in groups of k".
+- **Reversal** — iteratively rewire \`next\` pointers; base of "reverse in groups of k".
 - **Dummy head** — removes special-casing when inserting/deleting the first node.
 
-In competitive programming raw linked lists are rare (arrays with index "pointers" are faster), but the *idea* powers `std::list`, LRU caches and offline "delete element" tricks.
+In competitive programming raw linked lists are rare (arrays with index "pointers" are faster), but the *idea* powers \`std::list\`, LRU caches and offline "delete element" tricks.
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -98,7 +98,7 @@ bool hasCycle(Node* head) {
 
 void print(Node* head) {
     for (Node* c = head; c; c = c->next) cout << c->data << " -> ";
-    cout << "null\n";
+    cout << "null\\n";
 }
 
 int main() {
@@ -107,10 +107,10 @@ int main() {
     pushBack(head, 5);
     print(head);                                     // 1 -> 2 -> 3 -> 4 -> 5 -> null
 
-    cout << "middle = " << middle(head)->data << '\n';
+    cout << "middle = " << middle(head)->data << '\\n';
     head = reverseList(head);
     print(head);                                     // 5 -> 4 -> 3 -> 2 -> 1 -> null
-    cout << "cycle? " << boolalpha << hasCycle(head) << '\n';
+    cout << "cycle? " << boolalpha << hasCycle(head) << '\\n';
 
     // STL doubly linked list
     list<int> l = {1, 2, 3};
@@ -118,9 +118,9 @@ int main() {
     auto it = next(l.begin(), 2);
     l.erase(it);                                     // O(1) with an iterator
     for (int x : l) cout << x << ' ';                // 0 1 3
-    cout << '\n';
+    cout << '\\n';
 }
-```
+\`\`\`
 `,
 };
 

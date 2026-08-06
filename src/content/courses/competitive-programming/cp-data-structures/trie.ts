@@ -13,25 +13,25 @@ const topic: Topic = {
 
 A **trie** (prefix tree) stores strings character by character along root-to-node paths. Nodes share common prefixes, so:
 
-- `insert(word)` — O(|word|)
-- `search(word)`, `startsWith(prefix)` — O(|word|)
+- \`insert(word)\` — O(|word|)
+- \`search(word)\`, \`startsWith(prefix)\` — O(|word|)
 - Memory — O(total characters × alphabet)
 
-```
+\`\`\`
 insert "cat", "car", "dog"
         root
-       /    \
+       /    \\
       c      d
       a      o
-     / \     g*
+     / \\     g*
     t*  r*
-```
+\`\`\`
 
-`*` marks a terminal node (`isEnd`). Storing a `count` per node lets you delete words and count words with a given prefix.
+\`*\` marks a terminal node (\`isEnd\`). Storing a \`count\` per node lets you delete words and count words with a given prefix.
 
 ### Implementation styles
 
-- **Array of children** (`int nxt[26]`) — fastest; use a flat `vector<array<int,26>>` to avoid pointer chasing.
+- **Array of children** (\`int nxt[26]\`) — fastest; use a flat \`vector<array<int,26>>\` to avoid pointer chasing.
 - **Map of children** — memory-friendly for large alphabets.
 
 ### Binary trie (XOR trie)
@@ -46,7 +46,7 @@ Autocomplete, dictionary matching, Aho–Corasick automaton (trie + failure link
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -106,17 +106,17 @@ struct XorTrie {
 int main() {
     Trie tr;
     for (string w : {"cat", "car", "cart", "dog"}) tr.insert(w);
-    cout << tr.contains("car") << ' ' << tr.contains("ca") << '\n';   // 1 0
-    cout << tr.countPrefix("ca") << '\n';                             // 3
+    cout << tr.contains("car") << ' ' << tr.contains("ca") << '\\n';   // 1 0
+    cout << tr.countPrefix("ca") << '\\n';                             // 3
 
     XorTrie xt;
     vector<int> a = {3, 10, 5, 25, 2, 8};
     int best = 0;
     xt.insert(a[0]);
     for (size_t i = 1; i < a.size(); ++i) { best = max(best, xt.maxXor(a[i])); xt.insert(a[i]); }
-    cout << "max XOR pair = " << best << '\n';                        // 28
+    cout << "max XOR pair = " << best << '\\n';                        // 28
 }
-```
+\`\`\`
 `,
 };
 

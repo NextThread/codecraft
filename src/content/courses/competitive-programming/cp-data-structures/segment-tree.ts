@@ -13,16 +13,16 @@ const topic: Topic = {
 
 A **segment tree** answers range queries and point updates in **O(log n)** for any *associative* merge operation (sum, min, max, gcd, matrix product, "best subsegment", …).
 
-- Built over an array of size `n`, stored in an array of size `4n` (or `2n` for the iterative version).
-- Node `v` covers `[l, r]`; children cover `[l, mid]` and `[mid+1, r]`.
+- Built over an array of size \`n\`, stored in an array of size \`4n\` (or \`2n\` for the iterative version).
+- Node \`v\` covers \`[l, r]\`; children cover \`[l, mid]\` and \`[mid+1, r]\`.
 - Build — O(n), query — O(log n), point update — O(log n).
 
-```
+\`\`\`
                 [0,5] sum=36
         [0,2] 9              [3,5] 27
     [0,1]4   [2,2]5     [3,4]16   [5,5]11
  [0,0]1 [1,1]3        [3,3]7 [4,4]9
-```
+\`\`\`
 
 ### Compared to a Fenwick tree
 
@@ -42,11 +42,11 @@ A **segment tree** answers range queries and point updates in **O(log n)** for a
 
 ### The neutral element
 
-Every merge needs an identity: `0` for sum, `+inf` for min, `-inf` for max, `0` for gcd.
+Every merge needs an identity: \`0\` for sum, \`+inf\` for min, \`-inf\` for max, \`0\` for gcd.
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -108,16 +108,16 @@ struct MinSeg {
 int main() {
     vector<long long> a = {1, 3, 5, 7, 9, 11};
     SegTree st(a);
-    cout << st.query(1, 3) << '\n';       // 15
+    cout << st.query(1, 3) << '\\n';       // 15
     st.update(2, 100);
-    cout << st.query(1, 3) << '\n';       // 110
+    cout << st.query(1, 3) << '\\n';       // 110
 
     MinSeg ms({5, 2, 8, 1, 9});
-    cout << ms.query(0, 2) << '\n';       // 2
+    cout << ms.query(0, 2) << '\\n';       // 2
     ms.update(1, 7);
-    cout << ms.query(0, 2) << '\n';       // 5
+    cout << ms.query(0, 2) << '\\n';       // 5
 }
-```
+\`\`\`
 `,
 };
 

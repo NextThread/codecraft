@@ -11,7 +11,7 @@ const topic: Topic = {
 
 ## Theory
 
-The **LCA** of nodes `u` and `v` in a rooted tree is the deepest node that is an ancestor of both.
+The **LCA** of nodes \`u\` and \`v\` in a rooted tree is the deepest node that is an ancestor of both.
 
 ### Approaches
 
@@ -25,23 +25,23 @@ The **LCA** of nodes `u` and `v` in a rooted tree is the deepest node that is an
 
 ### Distance from LCA
 
-```
+\`\`\`
 dist(u, v) = depth[u] + depth[v] - 2 * depth[lca(u, v)]
-```
+\`\`\`
 
-This single formula solves a huge fraction of tree problems: path lengths, "is w on the path u→v" (`dist(u,w) + dist(w,v) == dist(u,v)`), path sums with prefix sums from the root, and k-th node on a path.
+This single formula solves a huge fraction of tree problems: path lengths, "is w on the path u→v" (\`dist(u,w) + dist(w,v) == dist(u,v)\`), path sums with prefix sums from the root, and k-th node on a path.
 
 ### Binary lifting sketch (details in the next topic)
 
-Precompute `up[k][v]` = the `2^k`-th ancestor of `v`. To find the LCA:
+Precompute \`up[k][v]\` = the \`2^k\`-th ancestor of \`v\`. To find the LCA:
 
 1. Lift the deeper node until both depths match.
 2. If they coincide, that node is the LCA.
-3. Otherwise lift both together from the highest power down while the ancestors differ; the answer is `up[0][u]`.
+3. Otherwise lift both together from the highest power down while the ancestors differ; the answer is \`up[0][u]\`.
 
 ## C++ Implementation
 
-```cpp
+\`\`\`cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -96,11 +96,11 @@ int main() {
     addEdge(2,5); addEdge(4,6); addEdge(4,7); addEdge(5,8);
 
     LCA t(g, 0);
-    cout << t.lca(3, 6) << '\n';     // 1
-    cout << t.lca(6, 8) << '\n';     // 0
-    cout << t.dist(3, 7) << '\n';    // 3
+    cout << t.lca(3, 6) << '\\n';     // 1
+    cout << t.lca(6, 8) << '\\n';     // 0
+    cout << t.dist(3, 7) << '\\n';    // 3
 }
-```
+\`\`\`
 `,
 };
 
