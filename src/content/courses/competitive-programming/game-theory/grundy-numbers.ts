@@ -63,7 +63,7 @@ int mex(const vector<int>& s) {
     for (int i = 0;; ++i) if (!seen[i]) return i;
 }
 
-// Subtraction game: from a pile of size n you may remove any value in `moves`.
+// Subtraction game: from a pile of size n you may remove any value in "moves".
 vector<int> grundySubtraction(int n, const vector<int>& moves) {
     vector<int> g(n + 1, 0);
     for (int i = 1; i <= n; ++i) {
