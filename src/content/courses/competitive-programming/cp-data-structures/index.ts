@@ -18,7 +18,7 @@ import v_dsu from './dsu';
 
 const category: Category = {
   slug: "cp-data-structures",
-  title: "Data Structures",
+  title: "Data Structures (CP)",
   emoji: "\ud83d\udce6",
   courseSlug: "competitive-programming",
   courseTitle: "Competitive Programming",
