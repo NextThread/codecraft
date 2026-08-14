@@ -10,12 +10,14 @@ import v_dynamic_programming from './dynamic-programming';
 import v_cp_strings from './strings';
 import v_game_theory from './game-theory';
 import v_geometry from './geometry';
+import v_greedy from './greedy';
+import v_graphs from './graphs';
 
 const course: Course = {
   slug: "competitive-programming",
   title: "Competitive Programming",
   emoji: "\ud83c\udfc6",
-  categories: [v_competitive_programming, v_cp_math, v_searching, v_sorting, v_prefix_techniques, v_cp_data_structures, v_trees, v_dynamic_programming, v_cp_strings, v_game_theory, v_geometry],
+  categories: [v_competitive_programming, v_cp_math, v_searching, v_sorting, v_prefix_techniques, v_greedy, v_cp_data_structures, v_trees, v_graphs, v_dynamic_programming, v_cp_strings, v_game_theory, v_geometry],
 };
 
 export default course;
