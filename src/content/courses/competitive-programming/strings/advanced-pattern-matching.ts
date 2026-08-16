@@ -100,7 +100,6 @@ vector<double> multiply(vector<double> a, vector<double> b) {
 // C(k) == 0 (up to floating rounding) means a full match at shift k.
 vector<bool> wildcardMatch(const vector<double> &T, const vector<double> &P, double wildcard = 0.0) {
     int n = (int)T.size(), m = (int)P.size();
-    vector<double> Pmask(m), Prev(m), P2rev(m), Trev? ;
     // Build indicator: mask[i] = 1 if P[i] is not wildcard, else 0. Reverse P for convolution-as-correlation.
     vector<double> mask(m), Pval(m);
     for (int i = 0; i < m; i++) {

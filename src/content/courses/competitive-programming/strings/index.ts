@@ -8,6 +8,15 @@ import v_rolling_hash from './rolling-hash';
 import v_string_trie from './string-trie';
 import v_manacher from './manacher';
 import v_string_algorithms from './string-algorithms-pattern-matching';
+import v_double_hashing from './double-hashing';
+import v_aho_corasick from './aho-corasick';
+import v_suffix_array from './suffix-array';
+import v_lcp_array from './lcp-array';
+import v_suffix_automaton from './suffix-automaton';
+import v_suffix_tree from './suffix-tree';
+import v_palindromic_tree from './palindromic-tree';
+import v_advanced_pattern_matching from './advanced-pattern-matching';
+import v_advanced_string_applications from './advanced-string-applications';
 
 const category: Category = {
   slug: "cp-strings",
@@ -26,6 +35,15 @@ const category: Category = {
     v_string_trie,
     v_manacher,
     v_string_algorithms,
+    v_double_hashing,
+    v_aho_corasick,
+    v_suffix_array,
+    v_lcp_array,
+    v_suffix_automaton,
+    v_suffix_tree,
+    v_palindromic_tree,
+    v_advanced_pattern_matching,
+    v_advanced_string_applications,
   ],
 };
 

@@ -19,12 +19,12 @@ Every palindromic substring, when you strip its two outermost matching character
 - Each node stores: length of the palindrome, a **suffix link** to the longest proper palindromic suffix of it that's also a node (dropping its outer characters until a valid shorter or equal-class palindrome is found), and transition edges for each character c meaning "if we prepend/append c to this palindrome, we reach this other palindrome node."
 
 ### Online construction
-Process s character by character, maintaining a pointer `last` to the node of the longest palindromic suffix of the string processed so far. For each new character c at position i:
-1. Starting from `last`, walk up suffix links until finding a node X such that `s[i - len[X] - 1] == c` (i.e., prepending c to X's palindrome, viewed as extending symmetric around the new character, forms a valid new palindrome ending at i). The special -1-length root always satisfies this trivially (bootstraps length-1 palindromes).
-2. If X already has a transition on c, that's the palindrome ending at i (no new node needed); update `last` and continue.
-3. Otherwise create a new node Y with `len[Y] = len[X] + 2`, add transition `X --c--> Y`.
-4. Compute Y's suffix link: if `len[Y] == 1`, link to the root of length 0; otherwise walk up suffix links from X's suffix link similarly to find the correct shorter palindromic suffix and use its transition on c (or the length-0/length-(-1) root if none).
-5. Update `last = Y`.
+Process s character by character, maintaining a pointer \`last\` to the node of the longest palindromic suffix of the string processed so far. For each new character c at position i:
+1. Starting from \`last\`, walk up suffix links until finding a node X such that \`s[i - len[X] - 1] == c\` (i.e., prepending c to X's palindrome, viewed as extending symmetric around the new character, forms a valid new palindrome ending at i). The special -1-length root always satisfies this trivially (bootstraps length-1 palindromes).
+2. If X already has a transition on c, that's the palindrome ending at i (no new node needed); update \`last\` and continue.
+3. Otherwise create a new node Y with \`len[Y] = len[X] + 2\`, add transition \`X --c--> Y\`.
+4. Compute Y's suffix link: if \`len[Y] == 1\`, link to the root of length 0; otherwise walk up suffix links from X's suffix link similarly to find the correct shorter palindromic suffix and use its transition on c (or the length-0/length-(-1) root if none).
+5. Update \`last = Y\`.
 
 Because the depth of suffix-link walking is amortized O(1) per character (bounded by the fact that each new palindrome's suffix-link depth compared to the previous longest suffix palindrome changes by a controlled amount, similar in spirit to the Z-function/KMP amortized analysis), total construction is O(n) (for fixed/small alphabet with array transitions, or O(n log alphabet) with map-based transitions).
 
