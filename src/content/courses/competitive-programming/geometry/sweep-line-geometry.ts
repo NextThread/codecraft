@@ -16,7 +16,7 @@ The sweep line (or plane sweep) technique is a general paradigm for solving geom
 
 1. **Events**: Points where the combinatorial structure of the sweep changes — e.g., segment endpoints, intersection points, circle tangency points. Events are processed in sorted order (typically by x-coordinate, with ties broken by y or by event type).
 2. **Event queue**: A priority queue (or pre-sorted array if all events are known in advance) that yields events in sweep order. New events (like segment intersections) may be discovered and inserted dynamically.
-3. **Status structure**: A balanced BST (in C++, typically `std::set` or `std::map` with a custom comparator) that maintains the objects currently crossed by the sweep line, ordered by their position along the perpendicular axis (e.g., y-coordinate at current sweep x). This must support insertion, deletion, and neighbor queries (predecessor/successor) in O(log n).
+3. **Status structure**: A balanced BST (in C++, typically \`std::set\` or \`std::map\` with a custom comparator) that maintains the objects currently crossed by the sweep line, ordered by their position along the perpendicular axis (e.g., y-coordinate at current sweep x). This must support insertion, deletion, and neighbor queries (predecessor/successor) in O(log n).
 
 ### Why it works
 
