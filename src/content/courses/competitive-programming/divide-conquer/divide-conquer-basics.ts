@@ -5,7 +5,7 @@ const topic: Topic = {
   title: "Divide & Conquer Basics",
   description: "The core paradigm of splitting a problem into subproblems, solving recursively, and combining results.",
   readingTime: 8,
-  content: \`
+  content: `
 # Divide & Conquer Basics
 
 ## Theory
@@ -123,7 +123,7 @@ int main() {
     return 0;
 }
 \`\`\`
-\`,
+`,
 };
 
 export default topic;
