@@ -29,7 +29,7 @@ Topological order ensures that when vertex \`u\` is popped for processing, all e
 
 - No priority queue is needed — the topological order itself is the correct processing order, giving true linear time.
 - Works correctly with **negative edge weights**, something Dijkstra cannot handle.
-- If some vertices are unreachable from the source, their dist remains infinity, and edges from them are simply skipped (or safely relaxed since `dist[u] = infinity` won't improve anything, guard against overflow).
+- If some vertices are unreachable from the source, their dist remains infinity, and edges from them are simply skipped (or safely relaxed since \`dist[u] = infinity\` won't improve anything, guard against overflow).
 - To find longest paths (critical path method), negate the objective or directly take max instead of min.
 - If the graph is not guaranteed acyclic, first detect cycles (e.g., via Kahn's algorithm — if the produced order has fewer than V vertices, a cycle exists and this technique does not apply).
 
