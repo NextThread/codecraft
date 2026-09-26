@@ -1,8 +1,9 @@
 import type { Course, Category, Topic } from './types';
 import v_competitive_programming from './courses/competitive-programming';
 import v_c_programming from './courses/c-programming';
+import v_javascript_web from './courses/javascript-web';
 
-export const courses: Course[] = [v_competitive_programming, v_c_programming];
+export const courses: Course[] = [v_competitive_programming, v_c_programming, v_javascript_web];
 
 export type { Course, Category, Topic, TopicMeta, Difficulty } from './types';
 
