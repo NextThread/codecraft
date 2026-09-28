@@ -7,6 +7,7 @@ import { Callout } from '@/components/docs/Callout';
 import { ReadingProgressBar } from '@/components/docs/ReadingProgressBar';
 import { TopicMetaBar } from '@/components/docs/TopicMetaBar';
 import { RelatedTopics } from '@/components/docs/RelatedTopics';
+import { SectionQuiz } from '@/components/docs/SectionQuiz';
 import { TopicStatusControl } from '@/components/docs/TopicStatusControl';
 import { Button } from '@/components/ui/button';
 import { getArticle, getNextPrevArticles } from '@/data/documentation';
@@ -78,6 +79,10 @@ export default function DocsPage() {
 
       {/* Content */}
       <article className="docs-prose">{renderedContent}</article>
+
+      {category.quiz && category.topics[category.topics.length - 1]?.slug === slug && (
+        <SectionQuiz key={category.slug} title={category.title} questions={category.quiz} />
+      )}
 
       <TopicStatusControl slug={slug} />
 
