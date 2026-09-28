@@ -1,4 +1,5 @@
 import type { Category } from '@/content/types';
+import { quizzes } from '../quizzes';
 import v_callbacks_promises from './callbacks-promises';
 import v_async_await from './async-await';
 import v_fetch_api from './fetch-api';
@@ -11,6 +12,7 @@ const category: Category = {
   courseTitle: "JavaScript for Web Development",
   defaultDifficulty: "Medium",
   topics: [v_callbacks_promises, v_async_await, v_fetch_api],
+  quiz: quizzes['async-js'],
 };
 
 export default category;

@@ -1,4 +1,5 @@
 import type { Category } from '@/content/types';
+import { quizzes } from '../quizzes';
 import v_dom_basics from './dom-basics';
 import v_events from './events';
 import v_forms_validation from './forms-validation';
@@ -11,6 +12,7 @@ const category: Category = {
   courseTitle: "JavaScript for Web Development",
   defaultDifficulty: "Beginner",
   topics: [v_dom_basics, v_events, v_forms_validation],
+  quiz: quizzes['dom-events'],
 };
 
 export default category;

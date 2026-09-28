@@ -1,4 +1,5 @@
 import type { Category } from '@/content/types';
+import { quizzes } from '../quizzes';
 import v_es_modules from './es-modules';
 import v_local_storage from './local-storage';
 import v_todo_app_project from './todo-app-project';
@@ -11,6 +12,7 @@ const category: Category = {
   courseTitle: "JavaScript for Web Development",
   defaultDifficulty: "Medium",
   topics: [v_es_modules, v_local_storage, v_todo_app_project],
+  quiz: quizzes['modern-web'],
 };
 
 export default category;

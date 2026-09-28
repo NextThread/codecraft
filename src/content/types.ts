@@ -16,6 +16,13 @@ export interface Topic extends TopicMeta {
   lastUpdated?: string;
 }
 
+export interface QuizQuestion {
+  question: string;
+  options: string[];
+  answer: number; // index into options
+  explanation?: string;
+}
+
 export interface Category {
   slug: string;
   title: string;
@@ -24,6 +31,7 @@ export interface Category {
   courseTitle: string;
   defaultDifficulty?: Difficulty;
   topics: Topic[];
+  quiz?: QuizQuestion[];
 }
 
 export interface Course {
